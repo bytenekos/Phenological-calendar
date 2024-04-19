@@ -398,3 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 .idea/.idea.Phenological-calendar/.idea
 Phenological-calendar/.idea/.idea.Phenological-calendar/.idea
+.DS_Store
+.DS_Store
