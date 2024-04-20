@@ -4,11 +4,42 @@
     <div class="sidebar">
         <NavMenu/>
     </div>
+    <style>
+        .bg-top-panel {
+        
+            background-color: #145314;
+        }
 
+        .fixation-top {
+            background-color: #145314;
+            position: sticky;
+            top: 0; /* Зафиксировать верхнюю панель относительно верхнего края окна */
+            z-index: 1000; /* Установить z-index для обеспечения правильного порядка слоев */
+            width: 100%;
+        }
+        .text-position{
+            position: center;
+        }
+
+    </style>
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        <div class="fixation-top">
+            <div class="navbar navbar-dark bg-top-panel shadow-sm">
+
+                <div class="container">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/hop-1738985-1477284.png?f=webp" width="30" height="30" />
+                        <strong>
+                            Проект "Вырастим вместе"
+                        </strong>
+                    </a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
         </div>
+        
 
         <article class="content px-4">
             @Body
