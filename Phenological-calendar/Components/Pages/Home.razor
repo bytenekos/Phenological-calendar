@@ -11,6 +11,7 @@
     .text-bg-dark {
         color: #fff !important;
         background-color: #228B22;
+
     }
 
     .btn-outline-secondary {
@@ -31,15 +32,24 @@
     }
     .bg-image{
         background-image: url('https://images.wallpaperscraft.ru/image/single/pshenitsa_pole_kolosia_874966_3840x2160.jpg');
-        background-size: cover;
-        
+        background-size: 1920px 1080px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
     }
 
+    .py-4 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    }
+ 
 </style>
+
+
 <body>
-    <main>
+    <main class="bg-image">
         <div class="bg-image">
-            <div class="container py-4">
+        <div class="container py-4" style="color: white">
             <div class="p-5 mb-4 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-5">
                     <h1 class="display-5 fw-bold">О проекте</h1>
@@ -196,13 +206,4 @@
         <!-- /END THE FEATURETTES -->
 
     </div>
-
-
-
-
-
-    <footer class="pt-3 mt-4 text-body-secondary border-top">
-        © 2024
-    </footer>
-
 </body>
