@@ -1,10 +1,9 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    
-}
+
 
 a, .btn-link {
-    color: #006bb7;
+    color: #00b780;
 }
 
 .btn-primary {
@@ -19,9 +18,9 @@ a, .btn-link {
 
 .btn:hover{
     color: #fff;    
-    tansition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -moz-transition: all .3s linear; 
+    /*tansition: all .3s linear;*/
+    /*-webkit-transition: all .3s linear;*/
+    /*-moz-transition: all .3s linear; */
 }
 
 
