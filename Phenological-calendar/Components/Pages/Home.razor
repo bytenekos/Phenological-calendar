@@ -14,22 +14,6 @@
 
     }
 
-    .btn-outline-secondary {
-        --bs-btn-color: #f8f9fa;
-        --bs-btn-border-color: #f8f9fa;
-        --bs-btn-hover-color: #000;
-        --bs-btn-hover-bg: #f8f9fa;
-        --bs-btn-hover-border-color: #f8f9fa;
-        --bs-btn-focus-shadow-rgb: 248, 249, 250;
-        --bs-btn-active-color: #000;
-        --bs-btn-active-bg: #f8f9fa;
-        --bs-btn-active-border-color: #f8f9fa;
-        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-        --bs-btn-disabled-color: #f8f9fa;
-        --bs-btn-disabled-bg: transparent;
-        --bs-btn-disabled-border-color: #f8f9fa;
-        --bs-gradient: none;
-    }
     .bg-image{
         background-image: url('https://images.wallpaperscraft.ru/image/single/pshenitsa_pole_kolosia_874966_3840x2160.jpg');
         background-size: 1920px 1080px;
@@ -42,46 +26,52 @@
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
     }
+    
+    
+    .bg-body-tertiary2 {
+        --bs-bg-opacity: 1;
+        background-color: green;
+    }
  
 </style>
 
 
 <body>
-    <main class="bg-image">
+    <main>
         <div class="bg-image">
-        <div class="container py-4" style="color: white">
-            <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-                <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold">О проекте</h1>
-                    <p class="col-md-8 fs-4">
-                        Вырастим вместе – проект направленный на развитие агроспециальностьей и популяризацию сельского хозяйства среди школьников.
+            <div class="container py-4" style="color: white">
+                <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+                    <div class="container-fluid py-5">
+                        <h1 class="display-5 fw-bold">О проекте</h1>
+                        <p class="col-md-8 fs-4">
+                            Вырастим вместе – проект направленный на развитие агроспециальностьей и популяризацию сельского хозяйства среди школьников.
 
-                        Мы ценим наше главное достояние, нашу землю и хотим донести до всех о её ценности.
-                    </p>
-                    <button class="btn btn-primary btn-lg" style="" type="button" onclick="window.location.href = 'https://vk.com/letsgrowuptogether';">Группа ВК</button>
-                </div>
-            </div>
-
-            <div class="row align-items-md-stretch">
-                <div class="col-md-6">
-                    <div class="h-100 p-5 text-bg-dark rounded-3">
-                        <h2>Наш проект</h2>
-                        <p>
-                            Проект создан для популяризации науки среди молодёжи. Здесь вы узнаете как круто быть агрономом и чем они занимаются. Мы проводим занятия для ребят в возрасте от 12 до 18 лет. Мы ставим целью привлечь молодёжь к сельскому хозяйству.
-                            Проект был запущен в февраля 2024 года в городе Краснодар.
+                            Мы ценим наше главное достояние, нашу землю и хотим донести до всех о её ценности.
                         </p>
-                        <button class="btn btn-outline-secondary" type="button" onclick="window.location.href = 'https://vk.com/clip166112606_456239790';">Читать про нас</button>
+                        <button class="btn btn-primary btn-lg" style="" type="button" onclick="window.location.href = 'https://vk.com/letsgrowuptogether';">Группа ВК</button>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                        <h2>Россия - страна возможностей</h2>
-                        <p>«Россия – страна возможностей» — открытая площадка для общения талантливых и неравнодушных людей всех возрастов, обмена опытом между школьниками, студентами, профильными специалистами, предпринимателями, управленцами и волонтерами.</p>
-                        <button class="btn btn-outline-secondary" type="button" onclick="window.location.href = 'https://vk.com/clip166112606_456239790';">Смотреть видео</button>
+
+                <div class="row align-items-md-stretch">
+                    <div class="col-md-6">
+                        <div class="h-100 p-5 text-bg-dark rounded-3">
+                            <h2>Наш проект</h2>
+                            <p>
+                                Проект создан для популяризации науки среди молодёжи. Здесь вы узнаете как круто быть агрономом и чем они занимаются. Мы проводим занятия для ребят в возрасте от 12 до 18 лет. Мы ставим целью привлечь молодёжь к сельскому хозяйству.
+                                Проект был запущен в февраля 2024 года в городе Краснодар.
+                            </p>
+                            <button class="btn btn-outline-secondary" type="button" onclick="window.location.href = 'https://vk.com/clip166112606_456239790';">Читать про нас</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="h-100 p-5 bg-body-tertiary2 border rounded-3">
+                            <h2>Россия - страна возможностей</h2>
+                            <p>«Россия – страна возможностей» — открытая площадка для общения талантливых и неравнодушных людей всех возрастов, обмена опытом между школьниками, студентами, профильными специалистами, предпринимателями, управленцами и волонтерами.</p>
+                            <button class="btn btn-outline-secondary" type="button" onclick="window.location.href = 'https://vk.com/clip166112606_456239790';">Смотреть видео</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         
     </main>
