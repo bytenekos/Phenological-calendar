@@ -34,12 +34,58 @@
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: #3e8e41;}
 
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+* {box-sizing: border-box;}
+form {
+  width: auto;
+  float: right;
+  margin-right: 30px;
+}
+input {
+  width: 250px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #324b4e;
+  background: #F9F0DA;
+  outline: none;
+  position: relative;
+  transition: .3s linear;
+}
+input:focus {
+  width: 300px;
+}
+button {
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: -2px;
+  right: 0;
+}
+button:before{
+  content: "\f002";
+  font-family: FontAwesome;
+  color: #324b4e;
+}
 </style>
+
+<div class="container col-xxl-3">
+  <form>
+    <input type="text" placeholder="Искать здесь...">
+    <button type="submit"></button>
+  </form>
+</div>
+
+
+
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Выберите культуру
