@@ -17,7 +17,7 @@
     .bg-image{
         background: rgb(144, 238, 144, 1);
         
-        height: 950px;
+        height: 750px;
         border-radius: 15px;
         box-shadow: 0 0 1px #000;
         
@@ -41,7 +41,7 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
-
+    
     .bg-image3 {
         background: rgb(255, 250, 250);
         height: 1590px;
@@ -64,7 +64,17 @@
         padding-top: 1.5rem !important;
         padding-bottom: 1.5rem !important;
     }
-    
+    .py-5 {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        width: 100%;
+        padding-right: var(--bs-gutter-x, .75rem);
+        padding-left: var(--bs-gutter-x, .75rem);
+        margin-right: auto;
+        margin-left: auto;
+    }
     
     .bg-body-tertiary2 {
         --bs-bg-opacity: 1;
@@ -112,6 +122,7 @@
     
     .p-5 {
         padding: 3rem !important;
+       
     }
 </style>
 
@@ -120,9 +131,9 @@
     <main>
         <div class="bg-image">
             <div class="container py-4" style="color: white">
-                <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-                    <div class="container-fluid py-5">
-                        
+                <div class="mb-4 bg-body-tertiary rounded-3">
+                    <div class="container-fluid">
+                        <div class="h-100 p-5 text-bg-dark rounded-3">
                             <h1 class="display-5 fw-bold">О проекте</h1>
                             <p class="col-md-8 fs-4">
                                 Вырастим вместе – проект направленный на развитие агроспециальностьей и популяризацию сельского хозяйства среди школьников.
@@ -131,7 +142,10 @@
                             </p>
                         
    
-                        <button class="btn btn-primary btn-lg" style=".btn:hover color white" type="button" onclick="window.location.href = 'https://vk.com/letsgrowuptogether';">Группа Вконтакте</button>
+                            
+                            @* <button class="btn btn-primary btn-lg" style=".btn:hover color white" type="button" onclick="window.location.href = 'https://vk.com/letsgrowuptogether';">Группа Вконтакте</button> *@
+                            <button class="btn btn-outline-light" style=".btn:hover color white" type="button" onclick="window.location.href = 'https://vk.com/letsgrowuptogether';">Группа Вконтакте</button>
+                        </div>
                     </div>
                 </div>
 
@@ -158,8 +172,8 @@
         </div>
     </main>
 
-
-    <footer class="pt-3 mt-4 text-body-secondary "></footer>
+    <hr class="featurette-divider">
+    @* <footer class="pt-3 mt-4 text-body-secondary "></footer> *@
 
     <div class="bg-image2">
         <div class="album py-5 bg-body-tertiary">
