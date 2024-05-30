@@ -10,11 +10,13 @@ a, .btn-link {
         color: #fff;
         background-color: #008000;
         border-color: #008000;
+        transition: transform 0.8s;
     }
 
         .btn-primary:hover {
             border-color: #006400;
             background-color: #006400;
+            transform: scale(1.03);
         }
 
         .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
