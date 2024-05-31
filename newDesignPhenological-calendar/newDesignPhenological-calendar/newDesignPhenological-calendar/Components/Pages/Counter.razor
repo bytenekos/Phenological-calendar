@@ -2,230 +2,96 @@
 @rendermode InteractiveServer
 
 <PageTitle>Вырастим вместе</PageTitle>
+<script src="https://kit.fontawesome.com/b8991598b2.js"></script>
 <style>
-  .w-340px {
-      width: 340px;
-  }
-  .rounded-3 {
-      border-radius: var(--bs-border-radius-lg) !important;
-  }
-  .p-2 {
-      padding: .5rem !important;
-  }
-  .mx-0 {
-      margin-right: 0 !important;
-      margin-left: 0 !important;
-  }
-  .position-static {
-      position: static !important;
-  }
-  .shadow {
-      box-shadow: var(--bs-box-shadow) !important;
-  }
-  .d-block {
-      display: block !important;
-  }
-  .dropdown-menu {
-      --bs-dropdown-zindex: 1000;
-      --bs-dropdown-min-width: 10rem;
-      --bs-dropdown-padding-x: 0;
-      --bs-dropdown-padding-y: 0.5rem;
-      --bs-dropdown-spacer: 0.125rem;
-      --bs-dropdown-font-size: 1rem;
-      --bs-dropdown-color: var(--bs-body-color);
-      --bs-dropdown-bg: var(--bs-body-bg);
-      --bs-dropdown-border-color: var(--bs-border-color-translucent);
-      --bs-dropdown-border-radius: var(--bs-border-radius);
-      --bs-dropdown-border-width: var(--bs-border-width);
-      --bs-dropdown-inner-border-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
-      --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
-      --bs-dropdown-divider-margin-y: 0.5rem;
-      --bs-dropdown-box-shadow: var(--bs-box-shadow);
-      --bs-dropdown-link-color: var(--bs-body-color);
-      --bs-dropdown-link-hover-color: var(--bs-body-color);
-      --bs-dropdown-link-hover-bg: var(--bs-tertiary-bg);
-      --bs-dropdown-link-active-color: #fff;
-      --bs-dropdown-link-active-bg: #0d6efd;
-      --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
-      --bs-dropdown-item-padding-x: 1rem;
-      --bs-dropdown-item-padding-y: 0.25rem;
-      --bs-dropdown-header-color: #6c757d;
-      --bs-dropdown-header-padding-x: 1rem;
-      --bs-dropdown-header-padding-y: 0.5rem;
-      position: absolute;
-      z-index: var(--bs-dropdown-zindex);
-      display: none;
-      min-width: var(--bs-dropdown-min-width);
-      padding: var(--bs-dropdown-padding-y) var(--bs-dropdown-padding-x);
-      margin: 0;
-      font-size: var(--bs-dropdown-font-size);
-      color: var(--bs-dropdown-color);
-      text-align: left;
-      list-style: none;
-      background-color: var(--bs-dropdown-bg);
-      background-clip: padding-box;
-      border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
-      border-radius: var(--bs-dropdown-border-radius);
-  }
-  :root, [data-bs-theme=light] {
-      --bs-blue: #0d6efd;
-      --bs-indigo: #6610f2;
-      --bs-purple: #6f42c1;
-      --bs-pink: #d63384;
-      --bs-red: #dc3545;
-      --bs-orange: #fd7e14;
-      --bs-yellow: #ffc107;
-      --bs-green: #198754;
-      --bs-teal: #20c997;
-      --bs-cyan: #0dcaf0;
-      --bs-black: #000;
-      --bs-white: #fff;
-      --bs-gray: #6c757d;
-      --bs-gray-dark: #343a40;
-      --bs-gray-100: #f8f9fa;
-      --bs-gray-200: #e9ecef;
-      --bs-gray-300: #dee2e6;
-      --bs-gray-400: #ced4da;
-      --bs-gray-500: #adb5bd;
-      --bs-gray-600: #6c757d;
-      --bs-gray-700: #495057;
-      --bs-gray-800: #343a40;
-      --bs-gray-900: #212529;
-      --bs-primary: #0d6efd;
-      --bs-secondary: #6c757d;
-      --bs-success: #198754;
-      --bs-info: #0dcaf0;
-      --bs-warning: #ffc107;
-      --bs-danger: #dc3545;
-      --bs-light: #f8f9fa;
-      --bs-dark: #212529;
-      --bs-primary-rgb: 13, 110, 253;
-      --bs-secondary-rgb: 108, 117, 125;
-      --bs-success-rgb: 25, 135, 84;
-      --bs-info-rgb: 13, 202, 240;
-      --bs-warning-rgb: 255, 193, 7;
-      --bs-danger-rgb: 220, 53, 69;
-      --bs-light-rgb: 248, 249, 250;
-      --bs-dark-rgb: 33, 37, 41;
-      --bs-primary-text-emphasis: #052c65;
-      --bs-secondary-text-emphasis: #2b2f32;
-      --bs-success-text-emphasis: #0a3622;
-      --bs-info-text-emphasis: #055160;
-      --bs-warning-text-emphasis: #664d03;
-      --bs-danger-text-emphasis: #58151c;
-      --bs-light-text-emphasis: #495057;
-      --bs-dark-text-emphasis: #495057;
-      --bs-primary-bg-subtle: #cfe2ff;
-      --bs-secondary-bg-subtle: #e2e3e5;
-      --bs-success-bg-subtle: #d1e7dd;
-  Show All Properties (67 more)
-  }
-  
-  .cal-weekday, .cal-btn {
-      display: flex;
-      flex-shrink: 0;
-      align-items: center;
-      justify-content: center;
-      height: 3rem;
-      padding: 0;
-  }
-</style>
-<h1>Counter</h1>
-
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
-@code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
+    body{
+        margin: 0;
+        padding: 0;
+        /* background: #1da1f3; */
     }
-}
 
+    .search-box{
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%,50%);
+        background: #2f3640;
+        height: 60px;
+        border-radius: 40px;
+        padding: 10px;
 
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Меню сайта
-    </button>
-    <div class="dropdown-menu d-block position-static p-2 mx-0 shadow rounded-3 w-340px" data-bs-theme="light">
-        <div class="d-grid gap-1">
-          <div class="cal">
-            <div class="cal-month">
-              <button class="btn cal-btn" type="button">
-                <svg class="bi" width="16" height="16"><use xlink:href="#arrow-left-short"></use></svg>
-              </button>
-              <strong class="cal-month-name">June</strong>
-              <select class="form-select cal-month-name d-none">
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option selected="" value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-              </select>
-              <button class="btn cal-btn" type="button">
-                <svg class="bi" width="16" height="16"><use xlink:href="#arrow-right-short"></use></svg>
-              </button>
-            </div>
-            <div class="cal-weekdays text-body-secondary">
-              <div class="cal-weekday">Sun</div>
-              <div class="cal-weekday">Mon</div>
-              <div class="cal-weekday">Tue</div>
-              <div class="cal-weekday">Wed</div>
-              <div class="cal-weekday">Thu</div>
-              <div class="cal-weekday">Fri</div>
-              <div class="cal-weekday">Sat</div>
-            </div>
-            <div class="cal-days">
-              <button class="btn cal-btn" disabled="" type="button">30</button>
-              <button class="btn cal-btn" disabled="" type="button">31</button>
-    
-              <button class="btn cal-btn" type="button">1</button>
-              <button class="btn cal-btn" type="button">2</button>
-              <button class="btn cal-btn" type="button">3</button>
-              <button class="btn cal-btn" type="button">4</button>
-              <button class="btn cal-btn" type="button">5</button>
-              <button class="btn cal-btn" type="button">6</button>
-              <button class="btn cal-btn" type="button">7</button>
-    
-              <button class="btn cal-btn" type="button">8</button>
-              <button class="btn cal-btn" type="button">9</button>
-              <button class="btn cal-btn" type="button">10</button>
-              <button class="btn cal-btn" type="button">11</button>
-              <button class="btn cal-btn" type="button">12</button>
-              <button class="btn cal-btn" type="button">13</button>
-              <button class="btn cal-btn" type="button">14</button>
-    
-              <button class="btn cal-btn" type="button">15</button>
-              <button class="btn cal-btn" type="button">16</button>
-              <button class="btn cal-btn" type="button">17</button>
-              <button class="btn cal-btn" type="button">18</button>
-              <button class="btn cal-btn" type="button">19</button>
-              <button class="btn cal-btn" type="button">20</button>
-              <button class="btn cal-btn" type="button">21</button>
-    
-              <button class="btn cal-btn" type="button">22</button>
-              <button class="btn cal-btn" type="button">23</button>
-              <button class="btn cal-btn" type="button">24</button>
-              <button class="btn cal-btn" type="button">25</button>
-              <button class="btn cal-btn" type="button">26</button>
-              <button class="btn cal-btn" type="button">27</button>
-              <button class="btn cal-btn" type="button">28</button>
-    
-              <button class="btn cal-btn" type="button">29</button>
-              <button class="btn cal-btn" type="button">30</button>
-              <button class="btn cal-btn" type="button">31</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    }
+
+    .search-btn{
+        color: green;
+        float: right;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        /* background: #2f3640; */
+        background: #2f3640;
+       
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+
+/*     .search-box:hover > .search-txt{
+        width: 240px;
+        padding: 0 6px;
+    } */
+    .search-txt{
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        padding: 0;
+        color: white;
+        font-size: 16px;
+        transition: 0.4s;
+        line-height: 40px;
+        width: 240px;
+        
+    }
+
+    .bg-body-tertiary {
+        padding: 0;
+        background-color: #D3D3D3;
+        border-radius: 15px;
+        box-shadow: 0 0 0px #000;
+        transition: transform 0.8s;
+    }
+</style>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<div class="search-box">
+    <input class="search-txt" type="text" name="" placeholder="Введите название культуры">
+    <a class="search-btn" href="#">
+        <i class="fa fa-search"></i>
+    </a>
 </div>
+
+<div class="container py-4">
+
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3" style="text-align: center;">
+        <div class="container-fluid py-5">
+            <p class="fs-4">
+                Вы можете найти любую интересующую вас культуру используя поисовки
+            </p>
+            <p class=" fs-4">
+                Огуре́ц обыкнове́нный, или Огурец посевно́й (лат. Cucumis sativus), — однолетнее травянистое растение, вид рода Огурец (Cucumis) семейства Тыквенные (Cucurbitaceae), овощная культура.
+            </p>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+

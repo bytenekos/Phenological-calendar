@@ -4,6 +4,17 @@
 
 
 <style>
+/*     body {
+        margin: 0;
+        padding: 0;
+        background-image: url(https://kartinki.pics/uploads/posts/2022-02/thumbs/1645506303_4-kartinkin-net-p-kartinki-polya-4.jpg);
+        height: 1000px;
+        background-size: 1920px 930px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        
+        
+    } */
     .rounded-3 {
         border-radius: var(--bs-border-radius-lg) !important;
     }
@@ -26,7 +37,24 @@
         box-shadow: 0 0 0px #000;
         transition: transform 0.8s;
     }
-    
+
+    .bg-dark {
+        --bs-bg-opacity: 1;
+        margin: 0;
+        padding: 0;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    }
+
+    .text-center {
+        text-align: center !important;
+/*         position: fixed;
+        z-index: 1; */
+    }
+    .border-bottom {
+        border-bottom: 1px solid #dee2e6 !important;
+/*         position: absolute;
+        z-index: 2; */
+    }
     .text-bg-dark:hover{
         transform: scale(1.03);
     }
@@ -122,9 +150,7 @@
 
 
 
-        @*     <footer class="pt-3 mt-4 text-body-secondary border-top">
-        © 2024
-        </footer> *@
+        
     </div>
     
     <div class="bg-dark text-secondary px-4 py-5 text-center">
@@ -158,4 +184,19 @@
             </div>
           </div>
     </div>
+
+
+    @* <footer class="pt-3 mt-4 text-body-secondary border-top"> *@
+        <p align="center" style="font-size: 10px;">
+            <br>
+            Все права защищены. Авторы проекта не несут ответственности
+            за точность прогнозов погоды и за возможные негативные<br>
+            последствия, возникшие при использовании информации с сайта.
+            Прогностическая информация на сайте носит исключительно<br>
+            ознакомительный характер и ее перепечатка в СМИ запрещена.
+            Для принятия решений необходимо руководствоваться официальными<br>
+            прогнозами погоды Гидрометцентра России.  © 2024 <br>
+            
+        </p>
+    @* </footer> *@
 </div>
