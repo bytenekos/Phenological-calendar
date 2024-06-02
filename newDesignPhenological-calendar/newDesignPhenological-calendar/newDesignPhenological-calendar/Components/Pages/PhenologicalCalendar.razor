@@ -1,0 +1,67 @@
+﻿@page "/phenological-calendar"
+@rendermode InteractiveServer
+
+<PageTitle>Вырастим вместе</PageTitle>
+
+<script src="https://kit.fontawesome.com/b8991598b2.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<div class="container py-4">
+    <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3">
+        <div class="container-fluid py-5">
+            <div class="search-box">
+                <input class="search-txt" type="text" name="" placeholder="Введите название культуры">
+                @* <a class="search-btn" href="#"> *@
+                <a class="search-btn">
+
+                    <i class="fa fa-search" @onclick="popit"></i>
+                    
+                </a>
+            </div>
+
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="https://pa1.aminoapps.com/7892/318138e30ef46c570aa8b2de1245506674589cd0r1-320-213_00.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">@brousic</h1>
+                    <p class="lead">@brousic</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        @* <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Читать про нас</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Смотреть видео</button> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="pt-3 mt-4 text-body-secondary border-top">
+<p align="center" style="font-size: 10px;">
+    <br>
+    Все права защищены. Авторы проекта не несут ответственности
+    за точность прогнозов погоды и за возможные негативные<br>
+    последствия, возникшие при использовании информации с сайта.
+    Прогностическая информация на сайте носит исключительно<br>
+    ознакомительный характер и ее перепечатка в СМИ запрещена.
+    Для принятия решений необходимо руководствоваться официальными<br>
+    прогнозами погоды Гидрометцентра России.  © 2024 <br>
+
+</p>
+</footer>
+
+@code{
+
+    newDesignPhenologicalcalendar.CallDB callDB = new newDesignPhenologicalcalendar.CallDB();
+
+
+    private string brousic = "иди нахуй";
+
+    public void popit()
+    {
+
+        brousic = callDB.calldbkak("SELECT * FROM theory");
+    }
+
+}
