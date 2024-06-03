@@ -5,7 +5,7 @@ namespace newDesignPhenologicalcalendar
 {
     public class CallDB
     {
-    public string calldbkak(string query) {
+    public string[] calldbkak(string query) {
 
             string host = "localhost"; // Имя хоста
             string database = "mytestdb"; // Имя базы данных
@@ -25,12 +25,15 @@ namespace newDesignPhenologicalcalendar
 
             mysql_result = mysql_query.ExecuteReader();
 
-            string result = "";
+
+            string[] result = new string[4];
 
             while (mysql_result.Read())
             {
-                
-                result += mysql_result.GetString(1).ToString();
+                result[0] += mysql_result.GetString(1).ToString();
+                result[1] += mysql_result.GetString(2).ToString();
+                result[2] += mysql_result.GetString(3).ToString();
+                result[3] += mysql_result.GetString(4).ToString();
             }
 
             mysql_result.Close();

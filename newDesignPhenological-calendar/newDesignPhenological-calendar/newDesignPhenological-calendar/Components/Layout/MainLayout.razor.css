@@ -2,10 +2,12 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    padding: 0;
 }
 
 main {
     flex: 1;
+
 }
 
 /*.sidebar {
@@ -50,6 +52,7 @@ main {
 @media (min-width: 641px) {
     .page {
         flex-direction: row;
+        padding: 0;
     }
 
     .sidebar {
