@@ -1,10 +1,188 @@
 ﻿@page "/phenological-calendar"
 @rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components
+@using System.Collections.Generic
 
 <PageTitle>Вырастим вместе</PageTitle>
 
 <script src="https://kit.fontawesome.com/b8991598b2.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<div class="px-4 py-5 my-3 text-center">
+	@* <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> *@
+	<div class="d-block mx-auto mb-4">
+		<svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
+			<path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5M2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5" />
+		</svg>
+	</div>
+	<h1 class="display-5 fw-bold text-body-emphasis">Фенологический календарь</h1>
+	<div class="col-lg-6 mx-auto">
+		<p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+			<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+			<button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+		</div>
+	</div>
+</div>
+
+
+
+<table class="iksweb">
+	<tbody>
+		<tr>
+			<td colspan="3">Апрель</td>
+			<td colspan="3">Май</td>
+			<td colspan="3">Июнь</td>
+			<td colspan="3">Июль</td>
+			<td colspan="3">Август</td>
+			<td colspan="3">Сентябрь</td>
+			<td rowspan="8"></td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<footer class="pt-3 mt-4 text-body-secondary border-top"> </footer> 
+
 
 
 
@@ -12,19 +190,28 @@
     <div class="container py-4">
         <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
             <div class="container-fluid py-5">
-                <div class="search-box">
-                    <input class="search-txt" type="text" id="searchString" @bind="searchText" name="" placeholder="Введите название культуры">
-                    @* <a class="search-btn" href="#">  *@
-                    <a class="search-btn">
+@*                 @code {
+                    private string searchText = "";
 
-                        <i class="fa fa-search" @onclick="popit"></i>
-
-                    </a>
-                    
-                </div>
+                    private void HandleInput(ChangeEventArgs e)
+                    {
+                        string searchText = e.Value.ToString();
+                        if (!string.IsNullOrEmpty(searchText) && searchText.Length == 1)
+                        {
+                            // Обрабатываем первый введённый символ
+                            Console.WriteLine($"Первый введённый символ: {searchText}");
+                        }
+                    }
+                } *@
 
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                     <div class="col-10 col-sm-8 col-lg-6">
+						<div class="search-box">
+							<input class="search-txt" type="text" id="searchString" @bind="searchText" placeholder="Введите название культуры" @oninput="popit">
+							<a class="search-btn">
+								<i class="fa fa-search" @onclick="popit"></i>
+							</a>
+						</div>
                         @*  <img src="https://pa1.aminoapps.com/7892/318138e30ef46c570aa8b2de1245506674589cd0r1-320-213_00.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"> *@
                         <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
                     </div>
@@ -74,8 +261,28 @@
     private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B#:~:text=%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B%20%E2%80%94%20%D1%81%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D1%85%D0%BE%D0%B7%D1%8F%D0%B9%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%BE%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D1%8F,%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D1%8F%D0%B5%D0%BC%D1%8B%D1%85%20%D0%BF%D0%BE%D0%B4%20%D0%BA%D1%83%D0%BB%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%B8%D0%B5%D0%BC%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B8.";
 
 
+    string[] clue = new string[20];
+
+    public void clay()
+    {
+        clue = callDB.calldbkak($"SELECT namess FROM theory");
+        Console.WriteLine(clue);
+    }
+
+    // static void HandleInput(ChangeEventArgs e)
+    // {
+    //     string searchText = e.Value.ToString();
+    //     if (!string.IsNullOrEmpty(searchText) && searchText.Length == 1)
+    //     {
+
+    //         Console.WriteLine($"Первый введённый символ: {searchText}");
+    //     }
+    // }
+
     public void popit()
     {
+        clay();
+
         if (searchText != "")
         {
             info = callDB.calldbkak($"SELECT * FROM theory WHERE namess = '{searchText}'");
