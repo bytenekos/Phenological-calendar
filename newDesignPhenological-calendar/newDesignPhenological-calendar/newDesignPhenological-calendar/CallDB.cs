@@ -25,7 +25,6 @@ namespace newDesignPhenologicalcalendar
 
             mysql_result = mysql_query.ExecuteReader();
 
-
             string[] result = new string[4];
 
             while (mysql_result.Read())

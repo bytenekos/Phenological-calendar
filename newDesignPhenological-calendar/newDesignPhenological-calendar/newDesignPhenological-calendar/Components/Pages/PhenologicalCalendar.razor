@@ -17,7 +17,7 @@
 	</div>
 	<h1 class="display-5 fw-bold text-body-emphasis">Фенологический календарь</h1>
 	<div class="col-lg-6 mx-auto">
-		<p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+		@* <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> *@
 		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
 			<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
 			<button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
@@ -26,6 +26,56 @@
 </div>
 
 
+
+
+<footer class="pt-3 mt-4 text-body-secondary border-top"> </footer> 
+
+
+
+
+<div class="bg-image-search" style="background-image: url(@linkImg);">
+    <div class="container py-4">
+        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
+            <div class="container-fluid py-5">
+@*                 @code {
+                    private string searchText = "";
+
+                    private void HandleInput(ChangeEventArgs e)
+                    {
+                        string searchText = e.Value.ToString();
+                        if (!string.IsNullOrEmpty(searchText) && searchText.Length == 1)
+                        {
+                            // Обрабатываем первый введённый символ
+                            Console.WriteLine($"Первый введённый символ: {searchText}");
+                        }
+                    }
+                } *@
+
+				<div class="search-box">
+					<input class="search-txt" type="text" id="searchString" @bind="searchText" placeholder="Введите название культуры" @oninput="popit">
+					<a class="search-btn">
+						<i class="fa fa-search" @onclick="popit"></i>
+					</a>
+				</div>
+
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        @*  <img src="https://pa1.aminoapps.com/7892/318138e30ef46c570aa8b2de1245506674589cd0r1-320-213_00.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"> *@
+                        <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">@namess</h1>
+                        <p class="lead">@theory</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('@linkWIki', '_blank');">Подробнее про @namess</button>
+                            @* <button type="button" class="btn btn-outline-secondary btn-lg px-4">Смотреть видео</button> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <table class="iksweb">
 	<tbody>
@@ -181,56 +231,6 @@
 	</tbody>
 </table>
 
-<footer class="pt-3 mt-4 text-body-secondary border-top"> </footer> 
-
-
-
-
-<div class="bg-image-search" style="background-image: url(@linkImg);">
-    <div class="container py-4">
-        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
-            <div class="container-fluid py-5">
-@*                 @code {
-                    private string searchText = "";
-
-                    private void HandleInput(ChangeEventArgs e)
-                    {
-                        string searchText = e.Value.ToString();
-                        if (!string.IsNullOrEmpty(searchText) && searchText.Length == 1)
-                        {
-                            // Обрабатываем первый введённый символ
-                            Console.WriteLine($"Первый введённый символ: {searchText}");
-                        }
-                    }
-                } *@
-
-                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div class="col-10 col-sm-8 col-lg-6">
-						<div class="search-box">
-							<input class="search-txt" type="text" id="searchString" @bind="searchText" placeholder="Введите название культуры" @oninput="popit">
-							<a class="search-btn">
-								<i class="fa fa-search" @onclick="popit"></i>
-							</a>
-						</div>
-                        @*  <img src="https://pa1.aminoapps.com/7892/318138e30ef46c570aa8b2de1245506674589cd0r1-320-213_00.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"> *@
-                        <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-                    </div>
-                    <div class="col-lg-6">
-                        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">@namess</h1>
-                        <p class="lead">@theory</p>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('@linkWIki', '_blank');">Подробнее про @namess</button>
-                            @* <button type="button" class="btn btn-outline-secondary btn-lg px-4">Смотреть видео</button> *@
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <footer class="pt-3 mt-4 text-body-secondary border-top">
 <p align="center" style="font-size: 10px;">
     <br>
@@ -261,13 +261,13 @@
     private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B#:~:text=%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B%20%E2%80%94%20%D1%81%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D1%85%D0%BE%D0%B7%D1%8F%D0%B9%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%BE%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D1%8F,%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D1%8F%D0%B5%D0%BC%D1%8B%D1%85%20%D0%BF%D0%BE%D0%B4%20%D0%BA%D1%83%D0%BB%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%B8%D0%B5%D0%BC%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B8.";
 
 
-    string[] clue = new string[20];
+    // string[] clue = new string[20];
 
-    public void clay()
-    {
-        clue = callDB.calldbkak($"SELECT namess FROM theory");
-        Console.WriteLine(clue);
-    }
+    // public void clay()
+    // {
+    //     clue = callDB.calldbkak($"SELECT namess FROM theory");
+    //     Console.WriteLine(clue);
+    // }
 
     // static void HandleInput(ChangeEventArgs e)
     // {
@@ -281,7 +281,7 @@
 
     public void popit()
     {
-        clay();
+        // clay();
 
         if (searchText != "")
         {
