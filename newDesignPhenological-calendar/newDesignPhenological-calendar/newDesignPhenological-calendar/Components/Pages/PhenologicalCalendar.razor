@@ -5,10 +5,11 @@
 
 <PageTitle>Вырастим вместе</PageTitle>
 
+
 <script src="https://kit.fontawesome.com/b8991598b2.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-<div class="px-4 py-5 my-3 text-center">
+<div class="px-4 py-5 my-3 text-center" style="padding: 24px;">
 	@* <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> *@
 	<div class="d-block mx-auto mb-4">
 		<svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
@@ -16,220 +17,118 @@
 		</svg>
 	</div>
 	<h1 class="display-5 fw-bold text-body-emphasis">Фенологический календарь</h1>
-	<div class="col-lg-6 mx-auto">
+
+		<form class="parent d-flex" role="search">
+			<input class="form-control me-2" type="search" placeholder="Введите вредителя" aria-label="Search">
+			@* <button class="btn btn-outline-success" type="submit">Найти</button> *@
+		</form>
+	<footer class="text-body-secondary"></footer>
+	<div class="col-lg-6 mx-auto"> 
+
 		@* <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> *@
 		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-			<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-			<button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+			<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Информация</button>
+			<button type="button" class="btn btn-outline-secondary btn-lg px-4">Расчитать календарь</button>
+			
+		</div>
+	</div> 
+</div>
+
+
+
+
+@* 
+<footer class="pt-3 mt-4 text-body-secondary border-top"> </footer>  *@
+
+<div class="container py-4">
+	<div class="row flex-lg-row-reverse align-items-center">
+		@* <div class="col-10 col-sm-8 col-lg-6">
+			<img src="https://sun9-10.userapi.com/impg/x1CkhEmvWN6o2aKFZ5nqK_lk6-SQd6E25kc-5Q/mivt4bhPJjY.jpg?size=2560x1695&quality=95&sign=7509339e9f89f4ac1cc29bf2b7d97bef&type=album" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+		</div> *@
+		<div class="col-10 col-sm-8 col-lg-6">
+			<input type="date" min="2023-01-01" max="2025-12-31">
+@* 			<input type="month">
+			<input type="week"> *@
+		</div>
+		<div class="col-lg-6">
+			<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Вредители</h1>
+			<p class="lead">Вредитель — это животное, которое причиняет ущерб здоровью человека или его хозяйству, понимая последнее в самом широком смысле</p>
+
+			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+
+@* 				<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Говно</button>
+				<button type="button" class="btn btn-outline-secondary btn-lg px-4">Моча</button> *@
+			</div>
 		</div>
 	</div>
-</div>
+</div> 
 
 
-
-
-<footer class="pt-3 mt-4 text-body-secondary border-top"> </footer> 
-
-
-
-
-<div class="bg-image-search" style="background-image: url(@linkImg);">
-    <div class="container py-4">
-        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
-            <div class="container-fluid py-5">
-@*                 @code {
-                    private string searchText = "";
-
-                    private void HandleInput(ChangeEventArgs e)
-                    {
-                        string searchText = e.Value.ToString();
-                        if (!string.IsNullOrEmpty(searchText) && searchText.Length == 1)
-                        {
-                            // Обрабатываем первый введённый символ
-                            Console.WriteLine($"Первый введённый символ: {searchText}");
-                        }
-                    }
-                } *@
-
-				<div class="search-box">
-					<input class="search-txt" type="text" id="searchString" @bind="searchText" placeholder="Введите название культуры" @oninput="popit">
-					<a class="search-btn">
-						<i class="fa fa-search" @onclick="popit"></i>
-					</a>
+<div class="all">
+	<input checked type="radio" name="respond" id="desktop">
+	<article id="slider">
+		<input checked type="radio" name="slider" id="switch1">
+		<input type="radio" name="slider" id="switch2">
+		<input type="radio" name="slider" id="switch3">
+		<input type="radio" name="slider" id="switch4">
+		<input type="radio" name="slider" id="switch5">
+		<input type="radio" name="slider" id="switch6">
+		<input type="radio" name="slider" id="switch7">
+		<input type="radio" name="slider" id="switch8">
+		<input type="radio" name="slider" id="switch9">
+		<input type="radio" name="slider" id="switch10">
+		<input type="radio" name="slider" id="switch11">
+		<input type="radio" name="slider" id="switch12">
+		<div id="slides">
+			<div id="overflow">
+				<div class="image">
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
+					<article><img src="https://cs13.pikabu.ru/post_img/big/2023/09/11/5/1694416670162565263.jpg"></article>
 				</div>
-
-                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div class="col-10 col-sm-8 col-lg-6">
-                        @*  <img src="https://pa1.aminoapps.com/7892/318138e30ef46c570aa8b2de1245506674589cd0r1-320-213_00.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"> *@
-                        <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-                    </div>
-                    <div class="col-lg-6">
-                        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">@namess</h1>
-                        <p class="lead">@theory</p>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('@linkWIki', '_blank');">Подробнее про @namess</button>
-                            @* <button type="button" class="btn btn-outline-secondary btn-lg px-4">Смотреть видео</button> *@
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+		<div id="controls">
+			<label for="switch1"></label>
+			<label for="switch2"></label>
+			<label for="switch3"></label>
+			<label for="switch4"></label>
+			<label for="switch5"></label>
+			<label for="switch6"></label>
+			<label for="switch7"></label>
+			<label for="switch8"></label>
+			<label for="switch9"></label>
+			<label for="switch10"></label>
+			<label for="switch11"></label>
+			<label for="switch12"></label>
+		</div>
+		<div id="active">
+			<label for="switch1"></label>
+			<label for="switch2"></label>
+			<label for="switch3"></label>
+			<label for="switch4"></label>
+			<label for="switch5"></label>
+			<label for="switch6"></label>
+			<label for="switch7"></label>
+			<label for="switch8"></label>
+			<label for="switch9"></label>
+			<label for="switch10"></label>
+			<label for="switch11"></label>
+			<label for="switch12"></label>
+		</div>
+	</article>
 </div>
 
-<table class="iksweb">
-	<tbody>
-		<tr>
-			<td colspan="3">Апрель</td>
-			<td colspan="3">Май</td>
-			<td colspan="3">Июнь</td>
-			<td colspan="3">Июль</td>
-			<td colspan="3">Август</td>
-			<td colspan="3">Сентябрь</td>
-			<td rowspan="8"></td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
+
 
 <footer class="pt-3 mt-4 text-body-secondary border-top">
 <p align="center" style="font-size: 10px;">
