@@ -1,4 +1,5 @@
 using newDesignPhenological_calendar.Components;
+using newDesignPhenological_calendar.Components.Pages;
 
 namespace newDesignPhenological_calendar
 {
@@ -11,7 +12,11 @@ namespace newDesignPhenological_calendar
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
-
+            
+            
+  
+            builder.Services.AddSingleton<DataService>();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -21,6 +26,8 @@ namespace newDesignPhenological_calendar
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+            
 
             app.UseHttpsRedirection();
 

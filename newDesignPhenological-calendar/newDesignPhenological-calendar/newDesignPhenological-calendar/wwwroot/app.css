@@ -1,6 +1,12 @@
-* {
+/** {
     margin: 0px;
     padding: 0px;
+}*/
+
+@media screen and (max-width: 420px){
+    container{
+        font-size: 1.5rem;
+    }
 }
 
 html, body {
@@ -305,93 +311,6 @@ body {
 }
 
 
-
-table.iksweb {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    height: auto;
-    padding: 50px;
-    /*margin: 60px;*/
-}
-
-    table.iksweb, table.iksweb td, table.iksweb th {
-        border: 1px solid #595959;
-    }
-
-        table.iksweb td, table.iksweb th {
-            padding: 3px;
-            width: 30px;
-            height: 35px;
-        }
-
-        table.iksweb th {
-            background: #347c99;
-            color: #fff;
-            font-weight: normal;
-        }
-table.iksweb {
-    text-decoration: none;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
-}
-
-    table.iksweb th {
-        font-weight: 500;
-        font-size: 14px;
-        color: #ffffff;
-        background-color: #354251;
-    }
-
-    table.iksweb td {
-        font-size: 13px;
-        color: #354251;
-    }
-
-    table.iksweb td, table.iksweb th {
-        white-space: pre-wrap;
-        padding: 10px 5px;
-        line-height: 13px;
-        vertical-align: middle;
-        border: 1px solid #354251;
-    }
-
-    table.iksweb tr:hover {
-        background-color: #f9fafb
-    }
-
-        table.iksweb tr:hover td {
-            color: #354251;
-            cursor: default;
-        }
-
-.mobile-table {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-}
-
-/*.form-control {
-    display: block;
-    width: 240px;*/
-    /*padding: .375rem .75rem;*/
-    /*font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;*/
-    /*color: var(--bs-body-color);
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: var(--bs-body-bg);
-    background-clip: padding-box;
-    border: var(--bs-border-width) solid var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
-/*}*/
-
-
-
 .me-2 {
     margin-right: .5rem !important;
 }
@@ -405,14 +324,22 @@ table.iksweb {
     font-weight: 400;
     line-height: 1.5;
     color: var(--bs-body-color);
-    /*-webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: var(--bs-body-bg);
-    background-clip: padding-box;
-    border: var(--bs-border-width) solid var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
+}
+
+.culture-finder-me-2 {
+    margin-right: .5rem !important;
+}
+
+.form-control-culture-finder {
+    display: block;
+    width: 240px;
+    height: 40px;
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    background-color: #6c757d;
 }
 
 .parent {
@@ -421,192 +348,67 @@ table.iksweb {
     padding: 10px;
 }
 
-/*-----------------------Слайдер----------------------------*/
+/-----Р”Р°С‚Р°----/
 
+.form-control {
+    display: block;
+    width: 10px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
 
-#slider { /*положение слайдера*/
+.input-group {
     position: relative;
-    text-align: center;
-    top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 50px;
 }
 
-#slider { /*центровка слайдера*/
-    margin: 0 auto;
+.dropdown-header {
+    display: block;
+    padding: var(--bs-dropdown-header-padding-y) var(--bs-dropdown-header-padding-x);
+    margin-bottom: 0;
+    font-size: .875rem;
+    color: var(--bs-dropdown-header-color);
+    white-space: nowrap;
 }
 
-#slides article { /*все изображения справа друг от доруга*/
-    width: 20%;
-    float: left;
-}
-
-#slides .image { /*устанавливает общий размер блока с изображениями*/
-    width: 500%;
-    line-height: 12;
-}
-
-#overflow { /*сркывает все, что находится за пределами этого блока*/
-    width: 100%;
+.dropdown-divider {
+    height: 0;
+    margin: var(--bs-dropdown-divider-margin-y) 0;
     overflow: hidden;
+    border-top: 1px solid var(--bs-dropdown-divider-bg);
+    opacity: 1;
 }
 
-article img { /*размер изображений слайдера*/
-    width: 100%;
-}
-
-#desktop:checked ~ #slider { /*размер всего слайдера*/
-    max-width: 1200px; /*максимальнная длинна*/
-}
-
-/*настройка переключения и положения для левой стрелки*/
-/*если свич1-5 активны, то идет обращение к лейблу из блока с id контролс*/
-#switch1:checked ~ #controls label:nth-child(12),
-#switch2:checked ~ #controls label:nth-child(1),
-#switch3:checked ~ #controls label:nth-child(2),
-#switch4:checked ~ #controls label:nth-child(3),
-#switch5:checked ~ #controls label:nth-child(4)
-#switch6:checked ~ #controls label:nth-child(5)
-#switch7:checked ~ #controls label:nth-child(6)
-#switch8:checked ~ #controls label:nth-child(7)
-#switch9:checked ~ #controls label:nth-child(8)
-#switch10:checked ~ #controls label:nth-child(9)
-#switch11:checked ~ #controls label:nth-child(10)
-#switch12:checked ~ #controls label:nth-child(11){
-    background: url("https://e7.pngegg.com/pngimages/779/795/png-clipart-shadow-arrow-shadow-arrow.png"); /*заливка фона картинкой без повторений*/
-    float: left;
-    margin: 0 0 0 -84px; /*сдвиг влево*/
-    display: block;
-    height: 68px;
-    width: 68px;
-}
-
-/*настройка переключения и положения для правой стрелки*/
-#switch1:checked ~ #controls label:nth-child(2),
-#switch2:checked ~ #controls label:nth-child(3),
-#switch3:checked ~ #controls label:nth-child(4),
-#switch4:checked ~ #controls label:nth-child(5),
-#switch5:checked ~ #controls label:nth-child(6)
-#switch6:checked ~ #controls label:nth-child(7)
-#switch7:checked ~ #controls label:nth-child(8)
-#switch8:checked ~ #controls label:nth-child(9)
-#switch9:checked ~ #controls label:nth-child(10)
-#switch10:checked ~ #controls label:nth-child(11)
-#switch11:checked ~ #controls label:nth-child(12)
-#switch12:checked ~ #controls label:nth-child(11)
-{
-    background: url("https://e7.pngegg.com/pngimages/779/795/png-clipart-shadow-arrow-shadow-arrow.png") no-repeat; /*заливка фона картинкой без повторений*/
-    float: right;
-    margin: 0 -84px 0 0; /*сдвиг вправо*/
-    display: block;
-    height: 68px;
-    width: 68px;
-}
-
-label, a { /*при наведении на стрелки или переключатели - курсор изменится*/
-    cursor: pointer;
-}
-
-.all input { /*скрывает стандартные инпуты (чекбоксы) на странице*/
-    display: none;
-}
-
-/*позиция изображения при активации переключателя*/
-#switch1:checked ~ #slides .image {
-    margin-left: 0;
-}
-
-#switch2:checked ~ #slides .image {
-    margin-left: -100%;
-}
-
-#switch3:checked ~ #slides .image {
-    margin-left: -200%;
-}
-
-#switch4:checked ~ #slides .image {
-    margin-left: -300%;
-}
-
-#switch5:checked ~ #slides .image {
-    margin-left: -400%;
-}
-
-#switch6:checked ~ #slides .image {
-    margin-left: -500%;
-}
-
-#switch7:checked ~ #slides .image {
-    margin-left: -600%;
-}
-
-#switch8:checked ~ #slides .image {
-    margin-left: -700%;
-}
-
-#switch9:checked ~ #slides .image {
-    margin-left: -800%;
-}
-
-#switch10:checked ~ #slides .image {
-    margin-left: -900%;
-}
-
-#switch11:checked ~ #slides .image {
-    margin-left: -1000%;
-}
-
-#switch12:checked ~ #slides .image {
-    margin-left: -1100%;
-}
-
-#controls { /*положение блока всех управляющих элементов*/
-    margin: -25% 0 0 0;
-    width: 100%;
-    height: 50px;
-}
-
-#active label { /*стиль отдельного переключателя*/
-    border-radius: 10px; /*скругление углов*/
-    display: inline-block; /*расположение в строку*/
-    width: 15px;
-    height: 15px;
-    background: #bbb;
-}
-
-#active { /*расположение блока с переключателями*/
-    margin: 23% 0 0;
+.date-form-container {
     text-align: center;
 }
-
-    #active label:hover { /*поведение чекбокса при наведении*/
-        background: #76c8ff;
-        border-color: #777 !important; /*выполнение в любом случае*/
-    }
-
-/*цвет активного лейбла при активации чекбокса*/
-#switch1:checked ~ #active label:nth-child(1),
-#switch2:checked ~ #active label:nth-child(2),
-#switch3:checked ~ #active label:nth-child(3),
-#switch4:checked ~ #active label:nth-child(4),
-#switch5:checked ~ #active label:nth-child(5), 
-#switch6:checked ~ #active label:nth-child(6), 
-#switch7:checked ~ #active label:nth-child(7), 
-#switch8:checked ~ #active label:nth-child(8),
-#switch9:checked ~ #active label:nth-child(9), 
-#switch10:checked ~ #active label:nth-child(10), 
-#switch11:checked ~ #active label:nth-child(11), 
-#switch12:checked ~ #active label:nth-child(12) {
-    background: #18a3dd;
-    border-color: #18a3dd !important;
+.form-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
-
-#slides .image { /*анимация пролистывания изображений*/
-    transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-#controls label:hover { /*прозрачность стрелок при наведении*/
-    opacity: 0.6;
+.form-group input {
+    width: 80px;
 }
-
-#controls label { /*прозрачность стрелок при отводе курсора*/
-    transition: opacity 0.2s ease-out;
+.btn {
+    margin-top: 10px;
 }
