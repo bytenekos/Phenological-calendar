@@ -1,5 +1,8 @@
-﻿public class DataRow
+﻿
+
+public class DataRow
 {
+    public int[] Columns = new int[32];
     public int Column1 { get; set; }
     public int Column2 { get; set; }
     public int Column3 { get; set; }
@@ -31,5 +34,9 @@
     public int Column29 { get; set; }
     public int Column30 { get; set; }
     public int Column31 { get; set; }
-    
+
+    public void Add(int dataRowColumn)
+    {
+        throw new NotImplementedException();
+    }
 }

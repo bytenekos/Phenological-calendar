@@ -1,14 +1,16 @@
-﻿public class DataService
+﻿
+public class DataService
 {
     public Task<List<DataRow>> GetDataAsync()
     {
         var data = new List<DataRow>();
         int a = 0;
+        
         for (int i = 0; i < 6; i++)
         {
             data.Add(new DataRow
             {
-                Column1 = i *  1,
+                Column1 = i * 1,
                 Column2 = i * 2,
                 Column3 = i * 3,
                 Column4 = i * 4,
@@ -39,7 +41,7 @@
                 Column29 = i * 4,
                 Column30 = i * 5,
                 Column31 = i * 6
-                
+    
             });
         }
         return Task.FromResult(data);

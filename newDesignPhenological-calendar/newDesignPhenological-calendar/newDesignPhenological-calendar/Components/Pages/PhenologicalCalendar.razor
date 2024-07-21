@@ -28,11 +28,11 @@
 			
 		</div>
 	</div> *@
-    <form class="parent d-flex" role="search">
+    @*<form class="parent d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Введите вредителя" aria-label="Search">
         <button type="button" class="btn btn-primary">Информация</button>
-        @* <button class="btn btn-outline-success" type="submit">Найти</button> *@
-    </form>
+        $1$ <button class="btn btn-outline-success" type="submit">Найти</button> #1#
+    </form>*@
     <footer class="text-body-secondary"></footer>
     <div class="col-lg-6 mx-auto"> 
         @* <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> *@
@@ -42,7 +42,98 @@
     </div> 
 </div>
 
+<div class="bg-image-search" style="background-image: url(@linkImg);">
+    <div class="container py-4">
+        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
+            <div class="container-fluid py-5">
+                
 
+                <div class="parent d-flex">
+                    <input class="form-control me-2" type="text" id="searchString" @bind="searchText" placeholder="Введите название вредителя" @oninput="popit">
+                    <a >
+                        <button class="btn btn-outline-success" type="submit" @onclick="popit">Найти</button>
+                    </a>
+                </div>
+
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        @*  <img src="https://pa1.aminoapps.com/7892/318138e30ef46c570aa8b2de1245506674589cd0r1-320-213_00.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"> *@
+                        <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">@namess</h1>
+                        <p class="lead">@theory</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('@linkWIki', '_blank');">Подробнее про @namess</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    newDesignPhenologicalcalendar.CallDB callDB = new newDesignPhenologicalcalendar.CallDB();
+
+    string[] info = new string[4];
+
+    private string searchText = string.Empty;
+
+    private string notFound = "";
+
+    private string namess = "Вредители";
+    private string theory = "Вредитель — это животное, которое причиняет ущерб здоровью человека или его хозяйству, понимая последнее в самом широком смысле. Вредитель снижает урожайность и качество продукции, нанося тем самым огромный экономический ущерб.";
+    private string linkImg = "https://belhp.by/upload/iblock/a84/18p4m1fos0s2z80jsspvdqvo39k01nu3.jpg";
+    private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B#:~:text=%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B%20%E2%80%94%20%D1%81%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D1%85%D0%BE%D0%B7%D1%8F%D0%B9%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%BE%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D1%8F,%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D1%8F%D0%B5%D0%BC%D1%8B%D1%85%20%D0%BF%D0%BE%D0%B4%20%D0%BA%D1%83%D0%BB%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%B8%D0%B5%D0%BC%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B8.";
+
+
+    // string[] clue = new string[20];
+
+    // public void clay()
+    // {
+    //     clue = callDB.calldbkak($"SELECT namess FROM theory");
+    //     Console.WriteLine(clue);
+    // }
+
+    // static void HandleInput(ChangeEventArgs e)
+    // {
+    //     string searchText = e.Value.ToString();
+    //     if (!string.IsNullOrEmpty(searchText) && searchText.Length == 1)
+    //     {
+
+    //         Console.WriteLine($"Первый введённый символ: {searchText}");
+    //     }
+    // }
+
+    public void popit()
+    {
+        // clay();
+
+        if (searchText != "")
+        {
+            info = callDB.calldbkak($"SELECT * FROM pests WHERE namess = '{searchText}'");
+
+            if (info[1] == null)
+            {
+                notFound = "Культура не найдена";
+            }
+            else
+            {
+                namess = info[0];
+                theory = info[1];
+                linkImg = info[2];
+                linkWIki = info[3];
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Пользователь написал {searchText}");
+        }
+
+    }
+}
 
 
 <style>
@@ -102,10 +193,10 @@
             
                 <p class="text-center">Введенная дата: @dateModel.Day/@dateModel.Month/@dateModel.Year</p>
             </div>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            @*<div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
                 <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
                 <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-            </div>
+            </div>*@
         </div>
         <div class="overflow-hidden" style="max-height: 30vh;">
             
@@ -358,47 +449,3 @@ else
 
 </p>
 </footer>
-
-@code{
-
-    newDesignPhenologicalcalendar.CallDB callDB = new newDesignPhenologicalcalendar.CallDB();
-
-    string[] info = new string[4];
-
-    private string searchText = string.Empty;
-
-    private string notFound = "";
-
-    private string namess = "Овощные культуры";
-    private string theory = "Овощные культуры — сельскохозяйственные овощные растения, выращиваемые человеком ради получения съедобных сочных продуктивных органов, объединяемых под кулинарным понятием овощи. Вопросами селекции, культивации и уборки овощных культур занимается специальная отрасль сельского хозяйства — овощеводство. В мировом хозяйстве существует около 120 овощных культур, 55 из которых возделываются повсеместно, включающих более 600 видов растений примерно из 80 ботанических семейств.";
-    private string linkImg = "https://world-nan.kz/img/news/7f04242a6d4e0be0e8133351dd128f2a.jpeg";
-    private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B#:~:text=%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B%20%E2%80%94%20%D1%81%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D1%85%D0%BE%D0%B7%D1%8F%D0%B9%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%BE%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D1%8F,%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D1%8F%D0%B5%D0%BC%D1%8B%D1%85%20%D0%BF%D0%BE%D0%B4%20%D0%BA%D1%83%D0%BB%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%B8%D0%B5%D0%BC%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B8.";
-
-    
-
-    public void popit()
-    {
-
-        if (searchText != "")
-        {
-            info = callDB.calldbkak($"SELECT * FROM theory WHERE namess = '{searchText}'");
-
-            if(info[1] == null)
-            {
-                notFound = "Культура не найдена";
-            }
-            else
-            {
-                namess = info[0];
-                theory = info[1];
-                linkImg = info[2];
-                linkWIki = info[3];
-            }
-        }
-        else
-        {
-            Console.WriteLine("Написал хуйню");
-        }
-
-    }
-}
