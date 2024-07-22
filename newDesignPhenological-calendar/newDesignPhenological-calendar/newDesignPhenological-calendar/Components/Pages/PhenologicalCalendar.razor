@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Components
 @using System.Collections.Generic
 @inject DataService DataService
-
+@using System.ComponentModel.DataAnnotations
 <PageTitle>Вырастим вместе</PageTitle>
 
 <div class="px-4 py-5 my-3 text-center" style="padding: 24px;">
@@ -136,7 +136,7 @@
 }
 
 
-<style>
+@*<style>
         .date-form-container {
             text-align: center;
         }
@@ -156,14 +156,36 @@
         .btn {
             margin-top: 10px;
         }
-    </style>
+    </style>*@
 
 
 <div>
     <div class="px-4 pt-5 my-5 text-center border-bottom">
         <h1 class="display-4 fw-bold text-body-emphasis">Расчтитать фенологический календарь</h1>
-        <div class="col-lg-6 mx-auto">
+        
+       <div class="date-form-container">
+           <div class="date-form">
+<div class="search-form-container">
+    
+    <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
+        @foreach (var month in months)
+        {
+            <option value="@month.Value">@month.Key</option>
+        }
+    </InputSelect>
+    <button @onclick="HandleSearch" class="btn btn-primary">Найти</button>
+</div>
+       
+               <p>Выбранный месяц: @selectedMonthName</p>
+           </div>
+       </div>
+
+        
+        @*<div class="col-lg-6 mx-auto">
             <div class="date-form-container">
+    
+                
+  
                 <EditForm Model="@dateModel" OnValidSubmit="@HandleValidSubmit">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
@@ -184,25 +206,79 @@
                     </div>
                     
                     		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    			@*<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Информация</button>*@
+                    			$1$<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Информация</button>#1#
                     			<button type="submit" class="btn btn-outline-secondary btn-lg px-4">Расчитать календарь</button>
                     			
                     		</div>
-                    @*<button type="submit" class="btn btn-primary">Отправить</button>*@
+                    $1$<button type="submit" class="btn btn-primary">Отправить</button>#1#
                 </EditForm>
             
                 <p class="text-center">Введенная дата: @dateModel.Day/@dateModel.Month/@dateModel.Year</p>
             </div>
-            @*<div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-            </div>*@
+
         </div>
         <div class="overflow-hidden" style="max-height: 30vh;">
             
-        </div>
+        </div>*@
     </div>
 </div>
+
+@code {
+    private DateModel dateModel = new DateModel();
+    private string searchQuery;
+    private string selectedMonthName;
+
+    private Dictionary<string, int> months = new Dictionary<string, int>
+    {
+        {"Январь", 1},
+        {"Февраль", 2},
+        {"Март", 3},
+        {"Апрель", 4},
+        {"Май", 5},
+        {"Июнь", 6},
+        {"Июль", 7},
+        {"Август", 8},
+        {"Сентябрь", 9},
+        {"Октябрь", 10},
+        {"Ноябрь", 11},
+        {"Декабрь", 12}
+    };
+
+    private void HandleSearch()
+    {
+        selectedMonthName = months.FirstOrDefault(m => m.Value == dateModel.Month).Key;
+        DataService.GetDataAsync(selectedMonthName);
+        Console.WriteLine(selectedMonthName);
+    }
+
+    public class DateModel
+    {
+        [Required(ErrorMessage = "Месяц обязателен")]
+        public int Month { get; set; }
+    }
+}
+<style>
+    .search-form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .month-dropdown {
+        width: 200px;
+        padding: 10px;
+        margin-right: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+</style>
+
+
+
+
 
 @*<div class="date-form-container">
     <EditForm Model="@dateModel" OnValidSubmit="@HandleValidSubmit">
@@ -235,7 +311,7 @@
     <p class="text-center">Введенная дата: @dateModel.Day/@dateModel.Month/@dateModel.Year</p>
 </div>*@
 
-@code {
+@*@code {
     public class DateModel
     {
         public int Day { get; set; }
@@ -250,7 +326,8 @@
         // Логика обработки данных после отправки формы
         Console.WriteLine($"Дата: {dateModel.Day}/{dateModel.Month}/{dateModel.Year}");
     }
-}
+
+}*@
 
 
 
@@ -331,7 +408,7 @@ else
                                                                                                                         <td>@row.Column28</td>
                                                                                                                         <td>@row.Column29</td>
                                                                                                                         <td>@row.Column30</td>
-                    <td>@row.Column31</td>
+                                                                                                                        <td>@row.Column31</td>
                 </tr>
             }
         </tbody>
@@ -343,7 +420,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        data = await DataService.GetDataAsync();
+        data = await DataService.GetDataAsync(selectedMonthName);
     }
 }
 

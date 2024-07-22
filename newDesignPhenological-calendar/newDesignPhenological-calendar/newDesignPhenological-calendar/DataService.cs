@@ -1,16 +1,24 @@
 ﻿
+using Mysqlx.Crud;
+using newDesignPhenological_calendar.Components.Pages;
+
+
 public class DataService
 {
-    public Task<List<DataRow>> GetDataAsync()
+    private readonly newDesignPhenologicalcalendar.CallDB callDB = new newDesignPhenologicalcalendar.CallDB();
+    public Task<List<DataRow>> GetDataAsync(string MonthName)
     {
         var data = new List<DataRow>();
-        int a = 0;
+        
+        string[] stage = callDB.calldbkak($"SELECT * FROM zaza WHERE month = '{MonthName}'");
         
         for (int i = 0; i < 6; i++)
         {
             data.Add(new DataRow
             {
-                Column1 = i * 1,
+                Column1 = stage[3];
+               
+                /*Column1 = i * 1,
                 Column2 = i * 2,
                 Column3 = i * 3,
                 Column4 = i * 4,
@@ -40,7 +48,7 @@ public class DataService
                 Column28 = i * 3,
                 Column29 = i * 4,
                 Column30 = i * 5,
-                Column31 = i * 6
+                Column31 = i * 6*/
     
             });
         }
