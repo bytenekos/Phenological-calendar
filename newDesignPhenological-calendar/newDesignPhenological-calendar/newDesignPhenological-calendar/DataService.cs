@@ -16,7 +16,7 @@ public class DataService
         {
             data.Add(new DataRow
             {
-                Column1 = stage[3];
+                //Column1 = stage[3];
                
                 /*Column1 = i * 1,
                 Column2 = i * 2,
