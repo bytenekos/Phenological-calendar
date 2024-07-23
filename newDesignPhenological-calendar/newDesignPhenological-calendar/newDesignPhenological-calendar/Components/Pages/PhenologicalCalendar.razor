@@ -3,7 +3,9 @@
 @using Microsoft.AspNetCore.Components
 @using System.Collections.Generic
 @inject DataService DataService
+@using System.Threading.Tasks
 @using System.ComponentModel.DataAnnotations
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 <PageTitle>Вырастим вместе</PageTitle>
 
 <div class="px-4 py-5 my-3 text-center" style="padding: 24px;">
@@ -161,102 +163,92 @@
 
 <div>
     <div class="px-4 pt-5 my-5 text-center border-bottom">
-        <h1 class="display-4 fw-bold text-body-emphasis">Расчтитать фенологический календарь</h1>
+        <h1 class="display-4 fw-bold text-body-emphasis">Расчитать фенологический календарь</h1>
         
-       <div class="date-form-container">
-           <div class="date-form">
-<div class="search-form-container">
-    
-    <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
-        @foreach (var month in months)
-        {
-            <option value="@month.Value">@month.Key</option>
-        }
-    </InputSelect>
-    <button @onclick="HandleSearch" class="btn btn-primary">Найти</button>
-</div>
-       
-               <p>Выбранный месяц: @selectedMonthName</p>
-           </div>
-       </div>
+        <div class="date-form-container">
+            <div class="date-form">
+                <div class="search-form-container">
+                    <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
+                        @foreach (var month in months)
+                        {
+                            <option value="@month">@month</option>
+                        }
+                    </InputSelect>
+                    <button @onclick="HandleSearch" class="btn btn-primary">Найти</button>
+                </div>
 
-        
-        @*<div class="col-lg-6 mx-auto">
-            <div class="date-form-container">
-    
-                
-  
-                <EditForm Model="@dateModel" OnValidSubmit="@HandleValidSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-            
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="day">День:</label>
-                            <InputNumber id="day" @bind-Value="dateModel.Day" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="month">Месяц:</label>
-                            <InputNumber id="month" @bind-Value="dateModel.Month" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="year">Год:</label>
-                            <InputNumber id="year" @bind-Value="dateModel.Year" class="form-control" />
-                        </div>
-                    </div>
-                    
-                    		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    			$1$<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Информация</button>#1#
-                    			<button type="submit" class="btn btn-outline-secondary btn-lg px-4">Расчитать календарь</button>
-                    			
-                    		</div>
-                    $1$<button type="submit" class="btn btn-primary">Отправить</button>#1#
-                </EditForm>
-            
-                <p class="text-center">Введенная дата: @dateModel.Day/@dateModel.Month/@dateModel.Year</p>
+                <p>Выбранный месяц: @selectedMonthName</p>
+
+                <!-- Таблица данных -->
+                @if (dataRows != null && dataRows.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                @for (int i = 1; i <= 31; i++)
+                                {
+                                    <th>Column @i</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in dataRows)
+                            {
+                                <tr>
+                                    @for (int i = 1; i <= 31; i++)
+                                    {
+                                        
+                                        <td>@row.GetType().GetProperty($"Column{i}")?.GetValue(row, null)</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Нет данных для отображения</p>
+                }
             </div>
-
         </div>
-        <div class="overflow-hidden" style="max-height: 30vh;">
-            
-        </div>*@
     </div>
 </div>
 
 @code {
     private DateModel dateModel = new DateModel();
-    private string searchQuery;
     private string selectedMonthName;
+    private List<DataRow> dataRows;
 
-    private Dictionary<string, int> months = new Dictionary<string, int>
+    private List<string> months = new List<string>
     {
-        {"Январь", 1},
-        {"Февраль", 2},
-        {"Март", 3},
-        {"Апрель", 4},
-        {"Май", 5},
-        {"Июнь", 6},
-        {"Июль", 7},
-        {"Август", 8},
-        {"Сентябрь", 9},
-        {"Октябрь", 10},
-        {"Ноябрь", 11},
-        {"Декабрь", 12}
+        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
     };
 
-    private void HandleSearch()
+    private async Task HandleSearch()
     {
-        selectedMonthName = months.FirstOrDefault(m => m.Value == dateModel.Month).Key;
-        DataService.GetDataAsync(selectedMonthName);
-        Console.WriteLine(selectedMonthName);
+        if (months.Contains(dateModel.Month))
+        {
+            selectedMonthName = dateModel.Month;
+            
+            var dataService = new DataService();
+            dataRows = await dataService.GetDataAsync(selectedMonthName);
+            Console.WriteLine(selectedMonthName);
+        }
+        else
+        {
+            Console.WriteLine("Неправильный месяц");
+        }
     }
 
     public class DateModel
     {
         [Required(ErrorMessage = "Месяц обязателен")]
-        public int Month { get; set; }
+        public string Month { get; set; }
     }
+    
 }
+
+
 <style>
     .search-form-container {
         display: flex;
@@ -331,7 +323,7 @@
 
 
 
-@if (data == null)
+@*@if (data == null)
 {
     <p>Loading...</p>
 }
@@ -413,7 +405,7 @@ else
             }
         </tbody>
     </table>
-}
+}*@
 
 @code {
     private List<DataRow> data;
