@@ -77,8 +77,8 @@ a {
     }
 
     .top-row, article {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
+        padding-left: 2rem;
+        padding-right: 1.5rem;
     }
 }
 
@@ -101,8 +101,5 @@ a {
         top: 0.5rem;
     }
 
-.bg-body-tertiary {
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
-}
+
 

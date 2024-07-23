@@ -181,11 +181,12 @@ body {
         
         
     } */
-.rounded-3 {
-    border-radius: var(--bs-border-radius-lg) !important;
+.rounded-box {
+    border-radius: 25px;
 }
 
 .bg-body-tertiary {
+    background-color: #999999;
     box-shadow: 0 0 0px #000;
     transition: transform 0.2s;
 }
@@ -209,9 +210,8 @@ body {
     }
 
 .text-bg-dark {
-    color: #fff !important;
+    color: #fff;
     background-color: #008000;
-    border-radius: 50px;
     box-shadow: 0 0 0px #000;
     transition: transform 0.2s;
 }
@@ -220,7 +220,7 @@ body {
     --bs-bg-opacity: 1;
     margin: 0;
     padding: 0;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity));
 }
 
 .text-center {
@@ -230,7 +230,7 @@ body {
 }
 
 .border-bottom {
-    border-bottom: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6;
     /*         position: absolute;
         z-index: 2; */
 }
@@ -240,11 +240,11 @@ body {
 }
 
 .p-5 {
-    padding: 3rem !important;
+    padding: 2rem;
 }
 
 .mb-4 {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 2rem;
 }
 
 *, ::after, ::before {
@@ -274,16 +274,16 @@ body {
 
 @media (min-width: 641px) {
     .top-row[b-9drrmcz3mj], article[b-9drrmcz3mj] {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
+        padding-left: 2rem;
+        padding-right: 1.5rem;
     }
 }
 .content {
     padding-top: 1.1rem;
 }
 .px-4 {
-    padding-right: 1.5rem !important;
-    padding-left: 1.5rem !important;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
 }
 
 .bg-image-search {
@@ -294,13 +294,13 @@ body {
 }
 
 .my-4 {
-    margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 
 .me-2 {
-    margin-right: .5rem !important;
+    margin-right: .5rem;
 }
 
 .form-control {
@@ -315,7 +315,7 @@ body {
 }
 
 .culture-finder-me-2 {
-    margin-right: .5rem !important;
+    margin-right: .5rem;
 }
 
 .form-control-culture-finder {
@@ -396,7 +396,4 @@ body {
 }
 .form-group input {
     width: 80px;
-}
-.btn {
-    margin-top: 10px;
 }
