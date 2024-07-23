@@ -21,13 +21,13 @@ a, .btn-link {
         color: #fff;
         background-color: #008000;
         border-color: #008000;
-        transition: transform 0.8s;
+        transition: transform 0.2s;
     }
 
         .btn-primary:hover {
             border-color: #006400;
             background-color: #006400;
-            transform: scale(1.03);
+            transform: scale(102%);
         }
 
         .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -124,7 +124,6 @@ input {
 body {
     margin: 0;
     padding: 0;
-    /* background: #1da1f3; */
 }
 
 .search-box {
@@ -171,14 +170,6 @@ body {
     width: 240px;
 }
 
-.bg-body-tertiary {
-    padding: 0;
-    background-color: #D3D3D3;
-    border-radius: 15px;
-    box-shadow: 0 0 0px #000;
-    transition: transform 0.8s;
-}
-
 /*     body {
         margin: 0;
         padding: 0;
@@ -195,15 +186,12 @@ body {
 }
 
 .bg-body-tertiary {
-    --bs-bg-opacity: 1;
-    background-color: #D3D3D3;
-    border-radius: 15px;
     box-shadow: 0 0 0px #000;
-    transition: transform 0.8s;
+    transition: transform 0.2s;
 }
 
     .bg-body-tertiary:hover {
-        transform: scale(1.03);
+        transform: scale(102%);
     }
 
 .bg-body-tertiary-theory {
@@ -225,7 +213,7 @@ body {
     background-color: #008000;
     border-radius: 50px;
     box-shadow: 0 0 0px #000;
-    transition: transform 0.8s;
+    transition: transform 0.2s;
 }
 
 .bg-dark {
