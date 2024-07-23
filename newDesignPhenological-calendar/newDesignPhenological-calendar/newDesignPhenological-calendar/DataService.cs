@@ -1,57 +1,78 @@
-﻿
+﻿using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
 using newDesignPhenological_calendar.Components.Pages;
 
 
 public class DataService
 {
-    private readonly newDesignPhenologicalcalendar.CallDB callDB = new newDesignPhenologicalcalendar.CallDB();
-    public Task<List<DataRow>> GetDataAsync(string MonthName)
+    private readonly string connectionString = "Server=localhost;Database=mytestdb;User ID=root;Password=ES1-731-p6zr;"; 
+
+    public async Task<List<DataRow>> GetDataAsync(string monthName)
     {
-        var data = new List<DataRow>();
-        
-        string[] stage = callDB.calldbkak($"SELECT * FROM zaza WHERE month = '{MonthName}'");
-        
-        for (int i = 0; i < 6; i++)
+        var dataRows = new List<DataRow>();
+
+        // SQL-запрос для получения данных по месяцу
+        string query = "SELECT * FROM zaza WHERE month = @MonthName";
+
+        using (var connection = new MySqlConnection(connectionString))
         {
-            data.Add(new DataRow
+            var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@MonthName", monthName);
+
+            try
             {
-                Column1 = stage[3];
-               
-                /*Column1 = i * 1,
-                Column2 = i * 2,
-                Column3 = i * 3,
-                Column4 = i * 4,
-                Column5 = i * 5,
-                Column6 = i * 1,
-                Column7 = i * 2,
-                Column8 = i * 3,
-                Column9 = i * 4,
-                Column10 = i * 5,
-                Column11 = i * 1,
-                Column12 = i * 2,
-                Column13 = i * 3,
-                Column14 = i * 4,
-                Column15 = i * 5,
-                Column16 = i * 1,
-                Column17 = i * 2,
-                Column18 = i * 3,
-                Column19 = i * 4,
-                Column20 = i * 5,
-                Column21 = i * 1,
-                Column22 = i * 2,
-                Column23 = i * 3,
-                Column24 = i * 4,
-                Column25 = i * 5,
-                Column26 = i * 1,
-                Column27 = i * 2,
-                Column28 = i * 3,
-                Column29 = i * 4,
-                Column30 = i * 5,
-                Column31 = i * 6*/
-    
-            });
+                await connection.OpenAsync();
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var dataRow = new DataRow
+                        {
+                            Column1 = reader.GetInt32(0),
+                            Column2 = reader.GetInt32(1),
+                            Column3 = reader.GetInt32(2),
+                            Column4 = reader.GetInt32(3),
+                            Column5 = reader.GetInt32(4),
+                            Column6 = reader.GetInt32(5),
+                            Column7 = reader.GetInt32(6),
+                            Column8 = reader.GetInt32(7),
+                            Column9 = reader.GetInt32(8),
+                            Column10 = reader.GetInt32(9),
+                            Column11 = reader.GetInt32(10),
+                            Column12 = reader.GetInt32(11),
+                            Column13 = reader.GetInt32(12),
+                            Column14 = reader.GetInt32(13),
+                            Column15 = reader.GetInt32(14),
+                            Column16 = reader.GetInt32(15),
+                            Column17 = reader.GetInt32(16),
+                            Column18 = reader.GetInt32(17),
+                            Column19 = reader.GetInt32(18),
+                            Column20 = reader.GetInt32(19),
+                            Column21 = reader.GetInt32(20),
+                            Column22 = reader.GetInt32(21),
+                            Column23 = reader.GetInt32(22),
+                            Column24 = reader.GetInt32(23),
+                            Column25 = reader.GetInt32(24),
+                            Column26 = reader.GetInt32(25),
+                            Column27 = reader.GetInt32(26),
+                            Column28 = reader.GetInt32(27),
+                            Column29 = reader.GetInt32(28),
+                            Column30 = reader.GetInt32(29),
+                            Column31 = reader.GetInt32(30)
+                        };
+
+                        dataRows.Add(dataRow);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Обработка ошибок
+                Console.WriteLine($"Ошибка при получении данных: {ex.Message}");
+            }
         }
-        return Task.FromResult(data);
+
+        return dataRows;
     }
 }
