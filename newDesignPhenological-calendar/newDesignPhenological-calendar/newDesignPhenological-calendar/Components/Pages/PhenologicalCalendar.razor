@@ -2,10 +2,12 @@
 @rendermode InteractiveServer
 @using Microsoft.AspNetCore.Components
 @using System.Collections.Generic
-@inject DataService DataService
-@using System.Threading.Tasks
 @using System.ComponentModel.DataAnnotations
+@inject DataService dataService
+@using System.Threading.Tasks
+@using System.Data.SqlClient;
 @using Microsoft.EntityFrameworkCore.Metadata.Internal
+
 <PageTitle>Вырастим вместе</PageTitle>
 
 <div class="px-4 py-5 my-3 text-center" style="padding: 24px;">
@@ -90,25 +92,6 @@
     private string linkImg = "https://belhp.by/upload/iblock/a84/18p4m1fos0s2z80jsspvdqvo39k01nu3.jpg";
     private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B#:~:text=%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B%20%E2%80%94%20%D1%81%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D1%85%D0%BE%D0%B7%D1%8F%D0%B9%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%BE%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D1%8F,%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D1%8F%D0%B5%D0%BC%D1%8B%D1%85%20%D0%BF%D0%BE%D0%B4%20%D0%BA%D1%83%D0%BB%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%B8%D0%B5%D0%BC%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B8.";
 
-
-    // string[] clue = new string[20];
-
-    // public void clay()
-    // {
-    //     clue = callDB.calldbkak($"SELECT namess FROM theory");
-    //     Console.WriteLine(clue);
-    // }
-
-    // static void HandleInput(ChangeEventArgs e)
-    // {
-    //     string searchText = e.Value.ToString();
-    //     if (!string.IsNullOrEmpty(searchText) && searchText.Length == 1)
-    //     {
-
-    //         Console.WriteLine($"Первый введённый символ: {searchText}");
-    //     }
-    // }
-
     public void popit()
     {
         // clay();
@@ -119,7 +102,7 @@
 
             if (info[1] == null)
             {
-                notFound = "Культура не найдена";
+                notFound = "Вредитель не найден";
             }
             else
             {
@@ -163,58 +146,249 @@
 
 <div>
     <div class="px-4 pt-5 my-5 text-center border-bottom">
-        <h1 class="display-4 fw-bold text-body-emphasis">Расчитать фенологический календарь</h1>
+        <h1 class="display-4 fw-bold text-body-emphasis">Рассчитать фенологический календарь</h1>
         
-        <div class="date-form-container">
+        <EditForm Model="@dateModel" OnValidSubmit="@HandleSearch">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+                <div class="date-form-container">
+                    <div class="date-form">
+                        <div class="search-form-container">
+                            <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
+                                <option value="">Выберите месяц</option>
+                                @foreach (var month in months)
+                                {
+                                    <option value="@month">@month</option>
+                                }
+                            </InputSelect>
+                            <button @onclick="HandleSearch" class="btn btn-primary">Расчитать</button>
+                        </div>
+                    </div>
+                </div>
+            </EditForm>
+        
+        @*<EditForm Model="@dateModel" OnValidSubmit="@HandleSearch">
+                   <DataAnnotationsValidator />
+                   <ValidationSummary />
+                   <div class="form-group">
+                       <label for="month">Месяц:</label>
+                       <InputSelect id="month" class="month-dropdown" @bind-Value="dateModel.Month">
+                           <option value="">Выберите месяц</option>
+                           @foreach (var month in months)
+                           {
+                               <option value="@month">@month</option>
+                           }
+                       </InputSelect>
+                   </div>
+                   <button type="submit" class="btn btn-primary">Рассчитать</button>
+                   
+               </EditForm>*@
+               
+               @if (selectedMonthName != null && dataList != null)
+               {
+                   <h4>Результаты для месяца: @selectedMonthName</h4>
+                   <table class="table">
+                       <thead>
+                           <tr>
+                               <th>День</th>
+                               <th>Этап</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @foreach (var data in dataList)
+                           {
+                               <tr>
+                                   <td>@data.Day</td>
+                                   <td>@data.Stage</td>
+                               </tr>
+                           }
+                       </tbody>
+                   </table>
+               }
+               
+               @code {
+                   private DateModel dateModel = new DateModel();
+                   private string selectedMonthName;
+                   private List<DataService.DayData> dataList = new List<DataService.DayData>(); // Инициализация
+               
+                   private List<string> months = new List<string>
+                   {
+                       "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+                   };
+               
+                   private async Task HandleSearch()
+                   {
+                       if (months.Contains(dateModel.Month))
+                       {
+                           selectedMonthName = dateModel.Month;
+                           dataList = await dataService.GetDataByMonthAsync(selectedMonthName) ?? new List<DataService.DayData>(); // Проверка на null
+                       }
+                       else
+                       {
+                           Console.WriteLine("Неправильный месяц");
+                       }
+                   }
+               
+                   public class DateModel
+                   {
+                       [Required(ErrorMessage = "Месяц обязателен")]
+                       public string Month { get; set; }
+                   }
+               }
+            @*<div class="date-form-container">
+                <div class="date-form">
+                    <div class="search-form-container">
+                        <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
+                            @foreach (var month in months)
+                            {
+                                <option value="@month">@month</option>
+                            }
+                        </InputSelect>
+                        <button @onclick="HandleSearch" class="btn btn-primary">Найти</button>
+                    </div>
+    
+                    <p>Выбранный месяц: @selectedMonthName</p>
+    
+                    <!-- Таблица данных -->
+                    @if (dataRows != null && dataRows.Any())
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    @for (int i = 1; i <= 31; i++)
+                                    {
+                                        <th>Column @i</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var row in dataRows)
+                                {
+                                    <tr>
+                                        @for (int i = 1; i <= 31; i++)
+                                        {
+                                            
+                                            <td>@row.GetType().GetProperty($"Column{i}")?.GetValue(row, null)</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Нет данных для отображения</p>
+                    }
+                </div>
+            </div>*@
+        </div>
+        
+        
+    @*@code {
+        private DateModel dateModel = new DateModel();
+        private string selectedMonthName;
+        /*private List<DataRow> dataRows;*/
+
+        private List<string> months = new List<string>
+        {
+            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+        };
+
+        private async Task HandleSearch()
+        {
+            if (months.Contains(dateModel.Month))
+            {
+                selectedMonthName = dateModel.Month;
+            
+                var dataService = new DataService();
+                /*dataRows = await dataService.GetDataByMonthAsync(selectedMonthName);*/
+                Console.WriteLine(selectedMonthName);
+            }
+            else
+            {
+                Console.WriteLine("Неправильный месяц");
+            }
+        }
+
+        public class DateModel
+        {
+            [Required(ErrorMessage = "Месяц обязателен")]
+            public string Month { get; set; }
+        }
+    
+    }*@
+    @*<div class="date-form-container">
             <div class="date-form">
                 <div class="search-form-container">
-                    <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
+                    <InputSelect @bind-Value="selectedMonth" class="month-dropdown">
                         @foreach (var month in months)
                         {
                             <option value="@month">@month</option>
                         }
                     </InputSelect>
-                    <button @onclick="HandleSearch" class="btn btn-primary">Найти</button>
+                    <button @onclick="HandleSearch" class="btn btn-primary">Расчитать</button>
                 </div>
 
                 <p>Выбранный месяц: @selectedMonthName</p>
-
-                <!-- Таблица данных -->
-                @if (dataRows != null && dataRows.Any())
+                
+                @if (selectedMonthName == "Январь")
                 {
                     <table class="table">
                         <thead>
+                        <tr>
+                            @for (int i = 1; i <= 31; i++)
+                            {
+                                <th>@i</th>
+                            }
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var row in dataRows)
+                        {
                             <tr>
                                 @for (int i = 1; i <= 31; i++)
                                 {
-                                    <th>Column @i</th>
+                                        
+                                    <td>@i</td>
                                 }
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var row in dataRows)
-                            {
-                                <tr>
-                                    @for (int i = 1; i <= 31; i++)
-                                    {
-                                        
-                                        <td>@row.GetType().GetProperty($"Column{i}")?.GetValue(row, null)</td>
-                                    }
-                                </tr>
-                            }
+                        }
                         </tbody>
                     </table>
                 }
                 else
                 {
-                    <p>Нет данных для отображения</p>
+                    <p>Выберите месяц</p>
                 }
             </div>
-        </div>
+        </div>*@
     </div>
-</div>
+    
+    
+    @*@code {
+        private string selectedMonth;
+        private string selectedMonthName;
+        private List<DataRow> dataRows;
+        private List<string> months = new List<string> { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
+    
+        private async Task HandleSearch()
+        {
+            selectedMonthName = selectedMonth; 
+            dataRows = await DataService.GetDataByMonthAsync(selectedMonth);
+        }
+    }*@
 
-@code {
+
+@*@code {
+    private List<DataRow> data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = await DataService.GetDataByMonthAsync(selectedMonthName);
+    }
+ }*@
+
+@*@code {
     private DateModel dateModel = new DateModel();
     private string selectedMonthName;
     private List<DataRow> dataRows;
@@ -246,7 +420,7 @@
         public string Month { get; set; }
     }
     
-}
+}*@
 
 
 <style>
@@ -407,14 +581,7 @@ else
     </table>
 }*@
 
-@code {
-    private List<DataRow> data;
 
-    protected override async Task OnInitializedAsync()
-    {
-        data = await DataService.GetDataAsync(selectedMonthName);
-    }
-}
 
 @*<div class="container py-4">
 	<form class="row g-3 needs-validation" novalidate>

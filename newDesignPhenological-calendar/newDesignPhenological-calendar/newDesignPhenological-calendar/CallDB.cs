@@ -14,10 +14,10 @@ namespace newDesignPhenologicalcalendar
         string dbuser = Environment.GetEnvironmentVariable("DBUSER");
         string dbpassword = Environment.GetEnvironmentVariable("DBPWD");
 
-            string host = dbhost; // Имя хоста
-            string database = dbname; // Имя базы данных
-            string user = dbuser; // Имя пользователя
-            string password = dbpassword; // Пароль пользователя
+            string host = "localhost"; // Имя хоста
+            string database = "mytestdb"; // Имя базы данных
+            string user = "root"; // Имя пользователя
+            string password = "ES1-731-p6zr"; // Пароль пользователя
 
             string Connect = "Database=" + database + ";Datasource=" + host + ";User=" + user + ";Password=" + password;
 

@@ -1,65 +1,83 @@
 ﻿@page "/"
 <link href="app.css" rel="stylesheet">
 <PageTitle>Вырастим вместе</PageTitle>
+<style>
+        /* Стили для фона видео */
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
 
+        /* Стили для контейнера с контентом */
+
+    </style>
 <div>
-    
-    <div class="container py-4">
+    <div class="background-video">
+        <video src="video/2oduvan.mp4" autoplay muted loop id="background-video"></video>
+        <div class="container py-4">
 
-        <div class="p-5 mb-4 bg-body-tertiary rounded-box">
-            <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">О проекте</h1>
-                <p class="col-md-8 fs-4">
-                    Вырастим вместе – проект направленный на развитие агроспециальностьей и популяризацию сельского хозяйства среди школьников.
+            <div class="p-5 mb-4 bg-body-tertiary rounded-box">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold">О проекте</h1>
+                    <p class="col-md-8 fs-4">
+                        Вырастим вместе – проект направленный на развитие агроспециальностьей и популяризацию сельского хозяйства среди школьников.
 
-                    Мы ценим наше главное достояние, нашу землю и хотим донести до всех о её ценности.
-                </p>
-                <button class="btn btn-primary btn-lg" type="button" onclick="window.open('https://vk.com/letsgrowuptogether', '_blank');">Группа Вконтакте</button>
-            </div>
-        </div>
-
-        <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-                <div class="h-100 p-5 text-bg-dark rounded-box">
-                    <h2>Наш проект</h2>
-                    <p>
-                        Проект создан для популяризации науки среди молодёжи. Здесь вы узнаете как круто быть агрономом и чем они занимаются. Мы проводим занятия для ребят в возрасте от 12 до 18 лет. Мы ставим целью привлечь молодёжь к сельскому хозяйству.
-                        Проект был запущен в февраля 2024 года в городе Краснодар.
+                        Мы ценим наше главное достояние, нашу землю и хотим донести до всех о её ценности.
                     </p>
-                    <button class="btn btn-outline-light" type="button">Читать про нас</button>
+                    <button class="btn btn-primary btn-lg" type="button" onclick="window.open('https://vk.com/letsgrowuptogether', '_blank');">Группа Вконтакте</button>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="h-100 p-5 bg-body-tertiary border rounded-box">
-                    <h2>Фенологический календарь</h2>
-                    <p>Фенологический календарь - это разделение года на качественно различающиеся периоды — сезоны и под сезоны, каждому из которых свойственно специфическое состояние объектов живой и неживой природы и их особое взаимодействие.</p>
-                    <button class="btn btn-primary" type="button" onclick="window.location.href = '/phenological-calendar';">Сделать расчёты</button>
+            <div class="row align-items-md-stretch">
+                <div class="col-md-6">
+                    <div class="h-100 p-5 text-bg-dark rounded-box">
+                        <h2>Наш проект</h2>
+                        <p>
+                            Проект создан для популяризации науки среди молодёжи. Здесь вы узнаете как круто быть агрономом и чем они занимаются. Мы проводим занятия для ребят в возрасте от 12 до 18 лет. Мы ставим целью привлечь молодёжь к сельскому хозяйству.
+                            Проект был запущен в февраля 2024 года в городе Краснодар.
+                        </p>
+                        <button class="btn btn-outline-light" type="button">Читать про нас</button>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="h-100 p-5 bg-body-tertiary border rounded-box">
+                        <h2>Фенологический календарь</h2>
+                        <p>Фенологический календарь - это разделение года на качественно различающиеся периоды — сезоны и под сезоны, каждому из которых свойственно специфическое состояние объектов живой и неживой природы и их особое взаимодействие.</p>
+                        <button class="btn btn-primary" type="button" onclick="window.location.href = '/phenological-calendar';">Сделать расчёты</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
-                <img src="https://sun9-29.userapi.com/impg/8iSZ5SfaObJYgTusCfoAlZJX12mHRsBUsBG11Q/CqgowqXcyro.jpg?size=2560x1695&quality=95&sign=4e7535a6cfec027801f091e96a4205b2&type=album" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-            </div>
-            <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Россия - страна возможностей</h1>
-                <p class="lead">«Россия – страна возможностей» — открытая площадка для общения талантливых и неравнодушных людей всех возрастов, обмена опытом между школьниками, студентами, профильными специалистами, предпринимателями, управленцами и волонтерами.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('https://rsv.ru/', '_blank');">Подробнее</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="window.open('https://vk.com/kastovcanin?z=clip166112606_456239790', '_blank')">Смотреть видео</button>
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="https://sun9-29.userapi.com/impg/8iSZ5SfaObJYgTusCfoAlZJX12mHRsBUsBG11Q/CqgowqXcyro.jpg?size=2560x1695&quality=95&sign=4e7535a6cfec027801f091e96a4205b2&type=album" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Россия - страна возможностей</h1>
+                    <p class="lead">«Россия – страна возможностей» — открытая площадка для общения талантливых и неравнодушных людей всех возрастов, обмена опытом между школьниками, студентами, профильными специалистами, предпринимателями, управленцами и волонтерами.</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('https://rsv.ru/', '_blank');">Подробнее</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="window.open('https://vk.com/kastovcanin?z=clip166112606_456239790', '_blank')">Смотреть видео</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
 
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="pb-2 border-bottom">Новости</h2>
 
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
             
-                <div class="col"><a href="https://vk.com/wall-225125103_14" target="_blank" style="text-decoration: none;">
+            <div class="col rounded-box">
+                <a href="https://vk.com/wall-225125103_14" target="_blank" style="text-decoration: none;">
                     <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url(img/news_1.png); background-repeat: no-repeat; background-size: 800px 800px;">
                         <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                             <figcaption class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">18 мая 2024 года командой проекта "Вырастим вместе" были проведены презентации проекта</figcaption>
@@ -67,9 +85,9 @@
                             </ul>
                         </div>
                     </div></a>
-                </div>
+            </div>
 
-            <div class="col">
+            <div class="col rounded-box">
                 <a href="https://vk.com/wall-225125103_11" target="_blank" style="text-decoration: none">
                 <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url(img/news_2.png); background-repeat: no-repeat; background-size: 800px 800px;">
                     <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
@@ -81,7 +99,7 @@
                 </div></a>
             </div>
 
-            <div class="col">
+            <div class="col rounded-box">
                 <a href="https://vk.com/wall-225125103_9" target="_blank" style="text-decoration: none">
                 <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url(img/news_3.png); background-repeat: no-repeat; background-size: 800px 800px;">
                     <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">

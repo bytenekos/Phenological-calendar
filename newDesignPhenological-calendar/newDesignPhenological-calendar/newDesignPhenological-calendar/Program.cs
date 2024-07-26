@@ -7,19 +7,21 @@ namespace newDesignPhenological_calendar
     {
         public static void Main(string[] args)
         {
+            
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
-            
-            
-  
+
+            /*builder.Services.AddSingleton<DataService>();*/
+            builder.Services.AddRazorPages();
+            builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<DataService>();
             
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
@@ -40,4 +42,7 @@ namespace newDesignPhenological_calendar
             app.Run();
         }
     }
+    
 }
+
+
