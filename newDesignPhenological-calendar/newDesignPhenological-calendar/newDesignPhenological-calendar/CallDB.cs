@@ -17,7 +17,7 @@ namespace newDesignPhenologicalcalendar
             string host = "localhost"; // Имя хоста
             string database = "PhenologicalCalendar"; // Имя базы данных
             string user = "root"; // Имя пользователя
-            string password = ""; // Пароль пользователя
+            string password = "ES1-731-p6zr"; // Пароль пользователя
 
             string Connect = "Database=" + database + ";Datasource=" + host + ";User=" + user + ";Password=" + password;
 

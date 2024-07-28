@@ -13,7 +13,7 @@ public class DataService
         public int Stage { get; set; }
     }
     
-    private string _connectionString = "Server=localhost;Database=PhenologicalCalendar;Uid=root;Pwd=;";
+    private string _connectionString = "Server=localhost;Database=PhenologicalCalendar;Uid=root;Pwd=ES1-731-p6zr;";
 
     public async Task<List<DayData>> GetDataByMonthAsync(string month)
     {

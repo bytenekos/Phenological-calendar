@@ -16,16 +16,41 @@
     
     <footer class="text-body-secondary"></footer>
     <div class="col-lg-6 mx-auto"> 
-        @* <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> *@
+        <div style=""><p class="lead mb-4">Сайт находиться в бета-тестировании, доступен только один вредитель</p> </div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             @*<button type="button" class="btn btn-outline-secondary btn-lg px-4">Расчитать календарь</button>*@
         </div>
     </div> 
 </div>
 
+<div class="container py-4">
+
+            <div class="row align-items-md-stretch">
+                <div class="col-md-6">
+                    <div class="h-100 p-5 text-bg-dark rounded-box">
+                        <h2>Наш проект</h2>
+                        <p>
+                            Проект создан для популяризации науки среди молодёжи. Здесь вы узнаете как круто быть агрономом и чем они занимаются. Мы проводим занятия для ребят в возрасте от 12 до 18 лет. Мы ставим целью привлечь молодёжь к сельскому хозяйству.
+                            Проект был запущен в февраля 2024 года в городе Краснодар.
+                        </p>
+                        <button class="btn btn-outline-light" type="button">Читать про нас</button>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="h-100 p-5 bg-body-tertiary border rounded-box">
+                        <h2>Фенологический календарь</h2>
+                        <p>Фенологический календарь - это разделение года на качественно различающиеся периоды — сезоны и под сезоны, каждому из которых свойственно специфическое состояние объектов живой и неживой природы и их особое взаимодействие.</p>
+                        <button class="btn btn-primary" type="button" onclick="window.location.href = '/phenological-calendar';">Сделать расчёты</button>
+                    </div>
+                </div>
+            </div>
+            
+    </div>
+
 <div class="bg-image-search" style="background-image: url(@linkImg);">
     <div class="container py-4">
-        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
+        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3 " style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
             <div class="container-fluid py-5">
                 <div class="parent d-flex">
                     <input class="form-control me-2" type="text" id="searchString" @bind="searchText" placeholder="Введите название вредителя" @oninput="popit">
@@ -65,7 +90,7 @@
     private string namess = "Вредители";
     private string theory = "Вредитель — это животное, которое причиняет ущерб здоровью человека или его хозяйству, понимая последнее в самом широком смысле. Вредитель снижает урожайность и качество продукции, нанося тем самым огромный экономический ущерб.";
     private string linkImg = "https://belhp.by/upload/iblock/a84/18p4m1fos0s2z80jsspvdqvo39k01nu3.jpg";
-    private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B#:~:text=%D0%9E%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B%20%E2%80%94%20%D1%81%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D1%85%D0%BE%D0%B7%D1%8F%D0%B9%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%BE%D0%B2%D0%BE%D1%89%D0%BD%D1%8B%D0%B5%20%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D1%8F,%D0%BE%D0%B1%D1%8A%D0%B5%D0%B4%D0%B8%D0%BD%D1%8F%D0%B5%D0%BC%D1%8B%D1%85%20%D0%BF%D0%BE%D0%B4%20%D0%BA%D1%83%D0%BB%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D0%B8%D0%B5%D0%BC%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B8.";
+    private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D0%BE%D0%B5)";
 
     public void popit()
     {
@@ -152,7 +177,41 @@
                            {
                                <tr>
                                    <td>@data.Day</td>
-                                   <td>@data.Stage</td>
+                                   <td>
+                                   @if (data.Stage == 1)
+                                   {
+                                       <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                       <p>Личинка / Имаго @data.Stage</p>
+                                   }
+                                   else if (data.Stage == 2)
+                                   {
+                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                       <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                       <p>Имаго / Яйцо @data.Stage</p>
+                                   }
+                                   else if (data.Stage == 3)
+                                   {
+                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                       <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                       <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                       
+                                       <p>Имаго / Яйцо / Личинка @data.Stage</p>
+                                   }
+                                   else if (data.Stage == 4)
+                                   {
+                                       <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                       <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                       
+                                       <p>Яйцо / Личинка / Имаго @data.Stage</p>
+                                   }
+                                   else
+                                   {
+                                       @data.Stage
+                                   }
+                               </td>
+                                   @*<td>@data.Stage</td>*@
                                </tr>
                            }
                        </tbody>
