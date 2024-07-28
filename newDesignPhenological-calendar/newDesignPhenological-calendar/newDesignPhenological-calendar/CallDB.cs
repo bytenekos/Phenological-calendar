@@ -15,9 +15,9 @@ namespace newDesignPhenologicalcalendar
         string dbpassword = Environment.GetEnvironmentVariable("DBPWD");
 
             string host = "localhost"; // Имя хоста
-            string database = "mytestdb"; // Имя базы данных
+            string database = "PhenologicalCalendar"; // Имя базы данных
             string user = "root"; // Имя пользователя
-            string password = "ES1-731-p6zr"; // Пароль пользователя
+            string password = ""; // Пароль пользователя
 
             string Connect = "Database=" + database + ";Datasource=" + host + ";User=" + user + ";Password=" + password;
 

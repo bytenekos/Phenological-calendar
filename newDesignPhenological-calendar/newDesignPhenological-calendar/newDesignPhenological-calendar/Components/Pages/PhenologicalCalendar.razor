@@ -1,12 +1,8 @@
 ﻿@page "/phenological-calendar"
 @rendermode InteractiveServer
-@using Microsoft.AspNetCore.Components
-@using System.Collections.Generic
 @using System.ComponentModel.DataAnnotations
 @inject DataService dataService
-@using System.Threading.Tasks
-@using System.Data.SqlClient;
-@using Microsoft.EntityFrameworkCore.Metadata.Internal
+
 
 <PageTitle>Вырастим вместе</PageTitle>
 
@@ -17,26 +13,7 @@
         </svg>
     </div>
     <h1 class="display-5 fw-bold text-body-emphasis">Фенологический календарь</h1>
-
-    @*<form class="parent d-flex" role="search">
-			<input class="form-control me-2" type="search" placeholder="Введите вредителя" aria-label="Search">
-			$1$ <button class="btn btn-outline-success" type="submit">Найти</button> #1#
-		</form>
-	<footer class="text-body-secondary"></footer>
-	<div class="col-lg-6 mx-auto"> 
-
-		$1$ <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> #1#
-		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-			<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Информация</button>
-			$1$<button type="button" class="btn btn-outline-secondary btn-lg px-4">Расчитать календарь</button>#1#
-			
-		</div>
-	</div> *@
-    @*<form class="parent d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Введите вредителя" aria-label="Search">
-        <button type="button" class="btn btn-primary">Информация</button>
-        $1$ <button class="btn btn-outline-success" type="submit">Найти</button> #1#
-    </form>*@
+    
     <footer class="text-body-secondary"></footer>
     <div class="col-lg-6 mx-auto"> 
         @* <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p> *@
@@ -50,8 +27,6 @@
     <div class="container py-4">
         <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
             <div class="container-fluid py-5">
-                
-
                 <div class="parent d-flex">
                     <input class="form-control me-2" type="text" id="searchString" @bind="searchText" placeholder="Введите название вредителя" @oninput="popit">
                     <a >
@@ -120,29 +95,24 @@
     }
 }
 
+<style>
+    .search-form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
 
-@*<style>
-        .date-form-container {
-            text-align: center;
-        }
-        .form-row {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .form-group input {
-            width: 80px;
-        }
-        .btn {
-            margin-top: 10px;
-        }
-    </style>*@
+    .month-dropdown {
+        width: 200px;
+        padding: 10px;
+        margin-right: 10px;
+    }
 
+    button {
+        padding: 10px 20px;
+    }
+</style>
 
 <div>
     <div class="px-4 pt-5 my-5 text-center border-bottom">
@@ -166,23 +136,6 @@
                     </div>
                 </div>
             </EditForm>
-        
-        @*<EditForm Model="@dateModel" OnValidSubmit="@HandleSearch">
-                   <DataAnnotationsValidator />
-                   <ValidationSummary />
-                   <div class="form-group">
-                       <label for="month">Месяц:</label>
-                       <InputSelect id="month" class="month-dropdown" @bind-Value="dateModel.Month">
-                           <option value="">Выберите месяц</option>
-                           @foreach (var month in months)
-                           {
-                               <option value="@month">@month</option>
-                           }
-                       </InputSelect>
-                   </div>
-                   <button type="submit" class="btn btn-primary">Рассчитать</button>
-                   
-               </EditForm>*@
                
                @if (selectedMonthName != null && dataList != null)
                {
@@ -235,440 +188,9 @@
                        public string Month { get; set; }
                    }
                }
-            @*<div class="date-form-container">
-                <div class="date-form">
-                    <div class="search-form-container">
-                        <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
-                            @foreach (var month in months)
-                            {
-                                <option value="@month">@month</option>
-                            }
-                        </InputSelect>
-                        <button @onclick="HandleSearch" class="btn btn-primary">Найти</button>
-                    </div>
-    
-                    <p>Выбранный месяц: @selectedMonthName</p>
-    
-                    <!-- Таблица данных -->
-                    @if (dataRows != null && dataRows.Any())
-                    {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    @for (int i = 1; i <= 31; i++)
-                                    {
-                                        <th>Column @i</th>
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in dataRows)
-                                {
-                                    <tr>
-                                        @for (int i = 1; i <= 31; i++)
-                                        {
-                                            
-                                            <td>@row.GetType().GetProperty($"Column{i}")?.GetValue(row, null)</td>
-                                        }
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <p>Нет данных для отображения</p>
-                    }
-                </div>
-            </div>*@
+        
         </div>
-        
-        
-    @*@code {
-        private DateModel dateModel = new DateModel();
-        private string selectedMonthName;
-        /*private List<DataRow> dataRows;*/
-
-        private List<string> months = new List<string>
-        {
-            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-        };
-
-        private async Task HandleSearch()
-        {
-            if (months.Contains(dateModel.Month))
-            {
-                selectedMonthName = dateModel.Month;
-            
-                var dataService = new DataService();
-                /*dataRows = await dataService.GetDataByMonthAsync(selectedMonthName);*/
-                Console.WriteLine(selectedMonthName);
-            }
-            else
-            {
-                Console.WriteLine("Неправильный месяц");
-            }
-        }
-
-        public class DateModel
-        {
-            [Required(ErrorMessage = "Месяц обязателен")]
-            public string Month { get; set; }
-        }
-    
-    }*@
-    @*<div class="date-form-container">
-            <div class="date-form">
-                <div class="search-form-container">
-                    <InputSelect @bind-Value="selectedMonth" class="month-dropdown">
-                        @foreach (var month in months)
-                        {
-                            <option value="@month">@month</option>
-                        }
-                    </InputSelect>
-                    <button @onclick="HandleSearch" class="btn btn-primary">Расчитать</button>
-                </div>
-
-                <p>Выбранный месяц: @selectedMonthName</p>
-                
-                @if (selectedMonthName == "Январь")
-                {
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            @for (int i = 1; i <= 31; i++)
-                            {
-                                <th>@i</th>
-                            }
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach (var row in dataRows)
-                        {
-                            <tr>
-                                @for (int i = 1; i <= 31; i++)
-                                {
-                                        
-                                    <td>@i</td>
-                                }
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
-                }
-                else
-                {
-                    <p>Выберите месяц</p>
-                }
-            </div>
-        </div>*@
     </div>
-    
-    
-    @*@code {
-        private string selectedMonth;
-        private string selectedMonthName;
-        private List<DataRow> dataRows;
-        private List<string> months = new List<string> { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
-    
-        private async Task HandleSearch()
-        {
-            selectedMonthName = selectedMonth; 
-            dataRows = await DataService.GetDataByMonthAsync(selectedMonth);
-        }
-    }*@
-
-
-@*@code {
-    private List<DataRow> data;
-
-    protected override async Task OnInitializedAsync()
-    {
-        data = await DataService.GetDataByMonthAsync(selectedMonthName);
-    }
- }*@
-
-@*@code {
-    private DateModel dateModel = new DateModel();
-    private string selectedMonthName;
-    private List<DataRow> dataRows;
-
-    private List<string> months = new List<string>
-    {
-        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-    };
-
-    private async Task HandleSearch()
-    {
-        if (months.Contains(dateModel.Month))
-        {
-            selectedMonthName = dateModel.Month;
-            
-            var dataService = new DataService();
-            dataRows = await dataService.GetDataAsync(selectedMonthName);
-            Console.WriteLine(selectedMonthName);
-        }
-        else
-        {
-            Console.WriteLine("Неправильный месяц");
-        }
-    }
-
-    public class DateModel
-    {
-        [Required(ErrorMessage = "Месяц обязателен")]
-        public string Month { get; set; }
-    }
-    
-}*@
-
-
-<style>
-    .search-form-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
-    }
-
-    .month-dropdown {
-        width: 200px;
-        padding: 10px;
-        margin-right: 10px;
-    }
-
-    button {
-        padding: 10px 20px;
-    }
-</style>
-
-
-
-
-
-@*<div class="date-form-container">
-    <EditForm Model="@dateModel" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="day">День:</label>
-                <InputNumber id="day" @bind-Value="dateModel.Day" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="month">Месяц:</label>
-                <InputNumber id="month" @bind-Value="dateModel.Month" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="year">Год:</label>
-                <InputNumber id="year" @bind-Value="dateModel.Year" class="form-control" />
-            </div>
-        </div>
-        
-        		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        			$1$<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Информация</button>#1#
-        			<button type="submit" class="btn btn-outline-secondary btn-lg px-4">Расчитать календарь</button>
-        			
-        		</div>
-        $1$<button type="submit" class="btn btn-primary">Отправить</button>#1#
-    </EditForm>
-
-    <p class="text-center">Введенная дата: @dateModel.Day/@dateModel.Month/@dateModel.Year</p>
-</div>*@
-
-@*@code {
-    public class DateModel
-    {
-        public int Day { get; set; }
-        public int Month { get; set; }
-        public int Year { get; set; }
-    }
-    
-    private DateModel dateModel = new DateModel();
-
-    private void HandleValidSubmit()
-    {
-        // Логика обработки данных после отправки формы
-        Console.WriteLine($"Дата: {dateModel.Day}/{dateModel.Month}/{dateModel.Year}");
-    }
-
-}*@
-
-
-
-@*@if (data == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-                <th>11</th>
-                <th>12</th>
-                <th>13</th>
-                <th>14</th>
-                <th>15</th>
-                <th>16</th>
-                <th>17</th>
-                <th>18</th>
-                <th>19</th>
-                <th>20</th>
-                <th>21</th>
-                <th>22</th>
-                <th>23</th>
-                <th>24</th>
-                <th>25</th>
-                <th>26</th>
-                <th>27</th>
-                <th>28</th>
-                <th>29</th>
-                <th>30</th>
-                <th>31</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in data)
-            {
-                <tr>
-                    <td>@row.Column1</td>
-                    <td>@row.Column2</td>
-                    <td>@row.Column3</td>
-                    <td>@row.Column4</td>
-                    <td>@row.Column5</td>
-                                        <td>@row.Column6</td>
-                                        <td>@row.Column7</td>
-                                        <td>@row.Column8</td>
-                                        <td>@row.Column9</td>
-                                        <td>@row.Column10</td>
-                                                            <td>@row.Column11</td>
-                                                            <td>@row.Column12</td>
-                                                            <td>@row.Column13</td>
-                                                            <td>@row.Column14</td>
-                                                            <td>@row.Column15</td>
-                                                                                <td>@row.Column16</td>
-                                                                                <td>@row.Column17</td>
-                                                                                <td>@row.Column18</td>
-                                                                                <td>@row.Column19</td>
-                                                                                <td>@row.Column20</td>
-                                                                                                    <td>@row.Column21</td>
-                                                                                                    <td>@row.Column22</td>
-                                                                                                    <td>@row.Column23</td>
-                                                                                                    <td>@row.Column24</td>
-                                                                                                    <td>@row.Column25</td>
-                                                                                                                        <td>@row.Column26</td>
-                                                                                                                        <td>@row.Column27</td>
-                                                                                                                        <td>@row.Column28</td>
-                                                                                                                        <td>@row.Column29</td>
-                                                                                                                        <td>@row.Column30</td>
-                                                                                                                        <td>@row.Column31</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}*@
-
-
-
-@*<div class="container py-4">
-	<form class="row g-3 needs-validation" novalidate>
-      <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">First name</label>
-        <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Last name</label>
-        <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">Username</label>
-        <div class="input-group has-validation">
-          <span class="input-group-text" id="inputGroupPrepend"></span>
-          <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-          <div class="invalid-feedback">
-            Please choose a username.
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <label for="validationCustom03" class="form-label">City</label>
-        <input type="text" class="form-control" id="validationCustom03" required>
-        <div class="invalid-feedback">
-          Please provide a valid city.
-        </div>
-      </div>
-      <div class="col-md-3">
-        <label for="validationCustom04" class="form-label">State</label>
-        <select class="form-select" id="validationCustom04" required>
-          <option selected disabled value="">Choose...</option>
-          <option>...</option>
-        </select>
-        <div class="invalid-feedback">
-          Please select a valid state.
-        </div>
-      </div>
-      <div class="col-md-3">
-        <label for="validationCustom05" class="form-label">Zip</label>
-        <input type="text" class="form-control" id="validationCustom05" required>
-        <div class="invalid-feedback">
-          Please provide a valid zip.
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-          <label class="form-check-label" for="invalidCheck">
-            Agree to terms and conditions
-          </label>
-          <div class="invalid-feedback">
-            You must agree before submitting.
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary" type="submit">Submit form</button>
-      </div>
-    </form>
-	<div class="row flex-lg-row-reverse align-items-center">
-		$1$ <div class="col-10 col-sm-8 col-lg-6">
-			<img src="https://sun9-10.userapi.com/impg/x1CkhEmvWN6o2aKFZ5nqK_lk6-SQd6E25kc-5Q/mivt4bhPJjY.jpg?size=2560x1695&quality=95&sign=7509339e9f89f4ac1cc29bf2b7d97bef&type=album" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-		</div> #1#
-		<div class="col-10 col-sm-8 col-lg-6">
-			<input type="date" min="2023-01-01" max="2025-12-31">
-			$1$ 			<input type="month">
-			<input type="week"> #1#
-		</div>
-		<div class="col-lg-6">
-			<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Вредители</h1>
-			<p class="lead">Вредитель — это животное, которое причиняет ущерб здоровью человека или его хозяйству, понимая последнее в самом широком смысле</p>
-
-			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-
-				$1$ 				<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Говно</button>
-				<button type="button" class="btn btn-outline-secondary btn-lg px-4">Моча</button> #1#
-			</div>
-		</div>
-	</div>
-</div>*@
 
 
 
@@ -676,12 +198,12 @@ else
 <p align="center" style="font-size: 10px;">
     <br>
     Все права защищены. Авторы проекта не несут ответственности
-    за точность прогнозов погоды и за возможные негативные<br>
+    за точность расчета фенологического календаря и за возможные негативные<br>
     последствия, возникшие при использовании информации с сайта.
     Прогностическая информация на сайте носит исключительно<br>
     ознакомительный характер и ее перепечатка в СМИ запрещена.
     Для принятия решений необходимо руководствоваться официальными<br>
-    прогнозами погоды Гидрометцентра России.  © 2024 <br>
+    расчетами фенологического календаря.  © 2024 <br>
 
 </p>
 </footer>
