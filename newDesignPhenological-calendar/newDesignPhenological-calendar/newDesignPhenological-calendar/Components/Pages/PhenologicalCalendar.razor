@@ -161,62 +161,120 @@
                     </div>
                 </div>
             </EditForm>
-               
                @if (selectedMonthName != null && dataList != null)
                {
                    <h4>Результаты для месяца: @selectedMonthName</h4>
-                   <table class="table">
-                       <thead>
-                           <tr>
-                               <th>День</th>
-                               <th>Этап</th>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           @foreach (var data in dataList)
-                           {
+                   <div style="display: flex; justify-content: center;">
+                       <table class="table" style="width: 80%; max-width: 800px; border-collapse: collapse;">
+                           <thead>
                                <tr>
-                                   <td>@data.Day</td>
-                                   <td>
-                                   @if (data.Stage == 1)
-                                   {
-                                       <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                       <p>Личинка / Имаго @data.Stage</p>
-                                   }
-                                   else if (data.Stage == 2)
-                                   {
-                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                       <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                       <p>Имаго / Яйцо @data.Stage</p>
-                                   }
-                                   else if (data.Stage == 3)
-                                   {
-                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                       <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                       <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                       
-                                       <p>Имаго / Яйцо / Личинка @data.Stage</p>
-                                   }
-                                   else if (data.Stage == 4)
-                                   {
-                                       <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                       <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                       <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                       
-                                       <p>Яйцо / Личинка / Имаго @data.Stage</p>
-                                   }
-                                   else
-                                   {
-                                       @data.Stage
-                                   }
-                               </td>
-                                   @*<td>@data.Stage</td>*@
+                                   <th style="padding: 8px; border: 1px solid #ddd;">День</th>
+                                   <th style="padding: 8px; border: 1px solid #ddd;">Этап</th>
                                </tr>
-                           }
-                       </tbody>
-                   </table>
+                           </thead>
+                           <tbody>
+                               @for (int i = 0; i < dataList.Count; i++)
+                               {
+                                   var data = dataList[i];
+                                   <tr style="background-color: @(i % 2 == 0 ? "#f2f2f2" : "white");">
+                                       <td style="padding: 8px; border: 1px solid #ddd;">@data.Day</td>
+                                       <td style="padding: 8px; border: 1px solid #ddd;">
+                                           @if (data.Stage == 1)
+                                           {
+                                               <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                               <p>Личинка / Имаго @data.Stage</p>
+                                           }
+                                           else if (data.Stage == 2)
+                                           {
+                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                               <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                               <p>Имаго / Яйцо @data.Stage</p>
+                                           }
+                                           else if (data.Stage == 3)
+                                           {
+                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                               <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                               <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                               <p>Имаго / Яйцо / Личинка @data.Stage</p>
+                                           }
+                                           else if (data.Stage == 4)
+                                           {
+                                               <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                               <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                               <p>Яйцо / Личинка / Имаго @data.Stage</p>
+                                           }
+                                           else
+                                           {
+                                               @data.Stage
+                                           }
+                                       </td>
+                                   </tr>
+                               }
+                           </tbody>
+                       </table>
+                   </div>
                }
+               
+               <style>
+ 
+               </style>
+               @* @if (selectedMonthName != null && dataList != null) *@
+               @* { *@
+               @*     <h4>Результаты для месяца: @selectedMonthName</h4> *@
+               @*     <table class="table"> *@
+               @*         <thead> *@
+               @*             <tr> *@
+               @*                 <th>День</th> *@
+               @*                 <th>Этап</th> *@
+               @*             </tr> *@
+               @*         </thead> *@
+               @*         <tbody> *@
+               @*             @foreach (var data in dataList) *@
+               @*             { *@
+               @*                 <tr> *@
+               @*                     <td>@data.Day</td> *@
+               @*                     <td> *@
+               @*                     @if (data.Stage == 1) *@
+               @*                     { *@
+               @*                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" /> *@
+               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
+               @*                         <p>Личинка / Имаго @data.Stage</p> *@
+               @*                     } *@
+               @*                     else if (data.Stage == 2) *@
+               @*                     { *@
+               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
+               @*                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" /> *@
+               @*                         <p>Имаго / Яйцо @data.Stage</p> *@
+               @*                     } *@
+               @*                     else if (data.Stage == 3) *@
+               @*                     { *@
+               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
+               @*                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" /> *@
+               @*                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" /> *@
+               @*                          *@
+               @*                         <p>Имаго / Яйцо / Личинка @data.Stage</p> *@
+               @*                     } *@
+               @*                     else if (data.Stage == 4) *@
+               @*                     { *@
+               @*                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" /> *@
+               @*                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" /> *@
+               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
+               @*                          *@
+               @*                         <p>Яйцо / Личинка / Имаго @data.Stage</p> *@
+               @*                     } *@
+               @*                     else *@
+               @*                     { *@
+               @*                         @data.Stage *@
+               @*                     } *@
+               @*                 </td> *@
+               @*                     $1$<td>@data.Stage</td>#1# *@
+               @*                 </tr> *@
+               @*             } *@
+               @*         </tbody> *@
+               @*     </table> *@
+               @* } *@
                
                @code {
                    private DateModel dateModel = new DateModel();

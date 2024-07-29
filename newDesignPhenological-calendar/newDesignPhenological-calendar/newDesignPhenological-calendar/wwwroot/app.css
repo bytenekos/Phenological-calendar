@@ -9,6 +9,12 @@
     }
 }
 
+
+@media (max-width: 600px) {
+    .table {
+        width: 100%;
+    }
+}
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
