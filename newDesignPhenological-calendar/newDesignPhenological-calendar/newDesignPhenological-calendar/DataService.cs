@@ -22,7 +22,7 @@ public class DataService
         using (MySqlConnection conn = new MySqlConnection(_connectionString))
         {
             await conn.OpenAsync();
-            MySqlCommand cmd = new MySqlCommand("SELECT day, stage FROM zaza WHERE month = @month", conn);
+            MySqlCommand cmd = new MySqlCommand("SELECT day, stage FROM ТепличнаяБелокрылка WHERE month = @month", conn);
             cmd.Parameters.AddWithValue("@month", month);
             using (DbDataReader reader = await cmd.ExecuteReaderAsync())
             {

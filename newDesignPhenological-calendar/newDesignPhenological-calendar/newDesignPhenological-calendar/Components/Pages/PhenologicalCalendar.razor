@@ -16,14 +16,14 @@
     
     <footer class="text-body-secondary"></footer>
     <div class="col-lg-6 mx-auto"> 
-        <div style=""><p class="lead mb-4">Сайт находиться в бета-тестировании, доступен только один вредитель</p> </div>
+        <div style=""><p class="lead mb-4">Внимание! Это Бета-версия сайта, предназначенная для тестирования. Она не отображает финального качества продукта. Спасибо за понимание и поддержку. Удачи!</p></div>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             @*<button type="button" class="btn btn-outline-secondary btn-lg px-4">Расчитать календарь</button>*@
         </div>
     </div> 
 </div>
 
-<div class="container py-4">
+@*<div class="container py-4">
 
             <div class="row align-items-md-stretch">
                 <div class="col-md-6">
@@ -46,7 +46,7 @@
                 </div>
             </div>
             
-    </div>
+    </div>*@
 
 <div class="bg-image-search" style="background-image: url(@linkImg);">
     <div class="container py-4">
@@ -54,14 +54,26 @@
             <div class="container-fluid py-5">
                 <div class="parent d-flex">
                     <input class="form-control me-2" type="text" id="searchString" @bind="searchText" placeholder="Введите название вредителя" @oninput="popit">
-                    <a >
+                    
+                    <div class="list-group mt-2" style="max-height: 150px; overflow-y: auto;" id="suggestions">
+                        @if (filteredPests.Any())               
+                        {
+                            @foreach (var pest in filteredPests)
+                            {
+                                <a href="#" class="list-group-item list-group-item-action" @onclick="() => SelectPest(pest)">
+                                    @pest
+                                </a>
+                            }
+                        }
+                    </div>
+                    
+                    <a>
                         <button class="btn btn-outline-success" type="submit" @onclick="popit">Найти</button>
                     </a>
                 </div>
 
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                     <div class="col-10 col-sm-8 col-lg-6">
-                        @*  <img src="https://pa1.aminoapps.com/7892/318138e30ef46c570aa8b2de1245506674589cd0r1-320-213_00.gif" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"> *@
                         <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
                     </div>
                     <div class="col-lg-6">
@@ -78,31 +90,42 @@
 </div>
 
 @code {
-
     newDesignPhenologicalcalendar.CallDB callDB = new newDesignPhenologicalcalendar.CallDB();
 
     string[] info = new string[4];
 
     private string searchText = string.Empty;
-
     private string notFound = "";
-
     private string namess = "Вредители";
     private string theory = "Вредитель — это животное, которое причиняет ущерб здоровью человека или его хозяйству, понимая последнее в самом широком смысле. Вредитель снижает урожайность и качество продукции, нанося тем самым огромный экономический ущерб.";
     private string linkImg = "https://belhp.by/upload/iblock/a84/18p4m1fos0s2z80jsspvdqvo39k01nu3.jpg";
     private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D0%BE%D0%B5)";
+    private bool isPestFound = false;
+
+    // Список вредителей
+    private List<string> pests = new List<string>
+    {
+        "Тепличная белокрылка",
+        "Тепличный трипс"
+    };
+
+    // Отфильтрованные вредители для подсказок
+    private List<string> filteredPests = new List<string>();
 
     public void popit()
     {
-        // clay();
-
         if (searchText != "")
         {
+            // Фильтрация вредителей по введенному тексту
+            filteredPests = pests.Where(p => p.Contains(searchText, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            // Поиск информации о вредителе
             info = callDB.calldbkak($"SELECT * FROM pests WHERE namess = '{searchText}'");
 
             if (info[1] == null)
             {
                 notFound = "Вредитель не найден";
+                isPestFound = false;
             }
             else
             {
@@ -110,13 +133,21 @@
                 theory = info[1];
                 linkImg = info[2];
                 linkWIki = info[3];
+                isPestFound = true;
             }
         }
         else
         {
             Console.WriteLine($"Пользователь написал {searchText}");
+            isPestFound = false;
         }
+    }
 
+    // Выбор вредителя из подсказок
+    private void SelectPest(string pest)
+    {
+        searchText = pest;
+        popit(); // Поиск информации по выбранному вредителю
     }
 }
 
@@ -141,140 +172,82 @@
 
 <div>
     <div class="px-4 pt-5 my-5 text-center border-bottom">
-        <h1 class="display-4 fw-bold text-body-emphasis">Рассчитать фенологический календарь</h1>
-        
-        <EditForm Model="@dateModel" OnValidSubmit="@HandleSearch">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-                <div class="date-form-container">
-                    <div class="date-form">
-                        <div class="search-form-container">
-                            <InputSelect @bind-Value="dateModel.Month" class="month-dropdown">
-                                <option value="">Выберите месяц</option>
-                                @foreach (var month in months)
-                                {
-                                    <option value="@month">@month</option>
-                                }
-                            </InputSelect>
-                            <button @onclick="HandleSearch" class="btn btn-primary">Расчитать</button>
-                        </div>
-                    </div>
-                </div>
-            </EditForm>
-               @if (selectedMonthName != null && dataList != null)
-               {
-                   <h4>Результаты для месяца: @selectedMonthName</h4>
-                   <div style="display: flex; justify-content: center;">
-                       <table class="table" style="width: 80%; max-width: 800px; border-collapse: collapse;">
-                           <thead>
-                               <tr>
-                                   <th style="padding: 8px; border: 1px solid #ddd;">День</th>
-                                   <th style="padding: 8px; border: 1px solid #ddd;">Этап</th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                               @for (int i = 0; i < dataList.Count; i++)
-                               {
-                                   var data = dataList[i];
-                                   <tr style="background-color: @(i % 2 == 0 ? "#f2f2f2" : "white");">
-                                       <td style="padding: 8px; border: 1px solid #ddd;">@data.Day</td>
-                                       <td style="padding: 8px; border: 1px solid #ddd;">
-                                           @if (data.Stage == 1)
-                                           {
-                                               <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                               <p>Личинка / Имаго @data.Stage</p>
-                                           }
-                                           else if (data.Stage == 2)
-                                           {
-                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                               <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                               <p>Имаго / Яйцо @data.Stage</p>
-                                           }
-                                           else if (data.Stage == 3)
-                                           {
-                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                               <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                               <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                               <p>Имаго / Яйцо / Личинка @data.Stage</p>
-                                           }
-                                           else if (data.Stage == 4)
-                                           {
-                                               <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                               <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                               <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                               <p>Яйцо / Личинка / Имаго @data.Stage</p>
-                                           }
-                                           else
-                                           {
-                                               @data.Stage
-                                           }
-                                       </td>
-                                   </tr>
-                               }
-                           </tbody>
-                       </table>
-                   </div>
-               }
-               
-               <style>
- 
-               </style>
-               @* @if (selectedMonthName != null && dataList != null) *@
-               @* { *@
-               @*     <h4>Результаты для месяца: @selectedMonthName</h4> *@
-               @*     <table class="table"> *@
-               @*         <thead> *@
-               @*             <tr> *@
-               @*                 <th>День</th> *@
-               @*                 <th>Этап</th> *@
-               @*             </tr> *@
-               @*         </thead> *@
-               @*         <tbody> *@
-               @*             @foreach (var data in dataList) *@
-               @*             { *@
-               @*                 <tr> *@
-               @*                     <td>@data.Day</td> *@
-               @*                     <td> *@
-               @*                     @if (data.Stage == 1) *@
-               @*                     { *@
-               @*                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" /> *@
-               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
-               @*                         <p>Личинка / Имаго @data.Stage</p> *@
-               @*                     } *@
-               @*                     else if (data.Stage == 2) *@
-               @*                     { *@
-               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
-               @*                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" /> *@
-               @*                         <p>Имаго / Яйцо @data.Stage</p> *@
-               @*                     } *@
-               @*                     else if (data.Stage == 3) *@
-               @*                     { *@
-               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
-               @*                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" /> *@
-               @*                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" /> *@
-               @*                          *@
-               @*                         <p>Имаго / Яйцо / Личинка @data.Stage</p> *@
-               @*                     } *@
-               @*                     else if (data.Stage == 4) *@
-               @*                     { *@
-               @*                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" /> *@
-               @*                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" /> *@
-               @*                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" /> *@
-               @*                          *@
-               @*                         <p>Яйцо / Личинка / Имаго @data.Stage</p> *@
-               @*                     } *@
-               @*                     else *@
-               @*                     { *@
-               @*                         @data.Stage *@
-               @*                     } *@
-               @*                 </td> *@
-               @*                     $1$<td>@data.Stage</td>#1# *@
-               @*                 </tr> *@
-               @*             } *@
-               @*         </tbody> *@
-               @*     </table> *@
-               @* } *@
+         <h1 class="display-4 fw-bold text-body-emphasis">Рассчитать фенологический календарь</h1>
+         
+         <EditForm Model="@dateModel" OnValidSubmit="@HandleSearch">
+             <DataAnnotationsValidator />
+             <ValidationSummary />
+                 <div class="date-form-container">
+                     <div class="date-form">
+                         <div class="search-form-container">
+                             <InputSelect @bind-Value="dateModel.Month" class="month-dropdown" disabled="@(isPestFound ? false : true)">
+                                 <option value="">Выберите месяц</option>
+                                 @foreach (var month in months)
+                                 {
+                                     <option value="@month">@month</option>
+                                 }
+                             </InputSelect>
+                             <button @onclick="HandleSearch" class="btn btn-primary" disabled="@(isPestFound ? false : true)">Расчитать</button>
+                         </div>
+                     </div>
+                 </div>
+         </EditForm>
+     
+         @if (selectedMonthName != null && dataList != null)
+         {
+             <h4>Результаты для месяца: @selectedMonthName</h4>
+             <div style="display: flex; justify-content: center;">
+                 <table class="table" style="width: 80%; max-width: 800px; border-collapse: collapse;">
+                     <thead>
+                         <tr>
+                             <th style="padding: 8px; border: 1px solid #ddd;">День</th>
+                             <th style="padding: 8px; border: 1px solid #ddd;">Этап</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         @for (int i = 0; i < dataList.Count; i++)
+                         {
+                             var data = dataList[i];
+                             <tr style="background-color: @(i % 2 == 0 ? "#f2f2f2" : "white");">
+                                 <td style="padding: 8px; border: 1px solid #ddd;">@data.Day</td>
+                                 <td style="padding: 8px; border: 1px solid #ddd;">
+                                     @if (data.Stage == 1)
+                                     {
+                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                         <p>Личинка / Имаго @data.Stage</p>
+                                     }
+                                     else if (data.Stage == 2)
+                                     {
+                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                         <p>Имаго / Яйцо @data.Stage</p>
+                                     }
+                                     else if (data.Stage == 3)
+                                     {
+                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                         <p>Имаго / Яйцо / Личинка @data.Stage</p>
+                                     }
+                                     else if (data.Stage == 4)
+                                     {
+                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                         <p>Яйцо / Личинка / Имаго @data.Stage</p>
+                                     }
+                                     else
+                                     {
+                                         @data.Stage
+                                     }
+                                 </td>
+                             </tr>
+                         }
+                     </tbody>
+                 </table>
+             </div>
+         }
                
                @code {
                    private DateModel dateModel = new DateModel();
