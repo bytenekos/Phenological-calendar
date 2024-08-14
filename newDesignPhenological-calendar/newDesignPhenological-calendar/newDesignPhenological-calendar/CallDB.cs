@@ -13,13 +13,8 @@ namespace newDesignPhenologicalcalendar
         string dbname = Environment.GetEnvironmentVariable("DBNAME");
         string dbuser = Environment.GetEnvironmentVariable("DBUSER");
         string dbpassword = Environment.GetEnvironmentVariable("DBPWD");
-
-            string host = "localhost"; // Имя хоста
-            string database = "PhenologicalCalendar"; // Имя базы данных
-            string user = "root"; // Имя пользователя
-            string password = "ES1-731-p6zr"; // Пароль пользователя
-
-            string Connect = "Database=" + database + ";Datasource=" + host + ";User=" + user + ";Password=" + password;
+        
+            string Connect = string.Format("Database={0};Datasource={1};User={2};Password={3};", dbname, dbhost, dbuser, dbpassword);
 
 
             MySqlConnection mysql_connection = new MySqlConnection(Connect);
