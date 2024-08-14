@@ -4,6 +4,26 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Data.Common;
 using MySql.Data.MySqlClient;
+using DotNetEnv;
+
+
+public static class Config
+{
+    static Config()
+    {
+        Env.Load();
+        DbHost = Environment.GetEnvironmentVariable("DBHOST");
+        DbName = Environment.GetEnvironmentVariable("DBNAME");
+        DbUser = Environment.GetEnvironmentVariable("DBUSER");
+        DbPassword = Environment.GetEnvironmentVariable("DBPWD");
+        
+    }
+    
+    public static string DbHost { get; }
+    public static string DbName { get; }
+    public static string DbUser { get; }
+    public static string DbPassword { get; }
+}
 
 public class DataService
 {
@@ -13,7 +33,8 @@ public class DataService
         public int Stage { get; set; }
     }
     
-    private string _connectionString = "Server=localhost;Database=PhenologicalCalendar;Uid=root;Pwd=ES1-731-p6zr;";
+    private string _connectionString = $"Server={Config.DbHost};Database={Config.DbName};Uid={Config.DbUser};Pwd={Config.DbPassword};";
+    
 
     public async Task<List<DayData>> GetDataByMonthAsync(string month)
     {
