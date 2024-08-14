@@ -118,140 +118,161 @@
 
 <div>
     <div class="px-4 pt-5 my-5 text-center border-bottom">
-         <h1 class="display-4 fw-bold text-body-emphasis">Рассчитать фенологический календарь</h1>
-         
-         <EditForm Model="@dateModel" OnValidSubmit="@HandleSearch">
-             <DataAnnotationsValidator />
-             <ValidationSummary />
-                 <div class="date-form-container">
-                     <div class="date-form">
-                         <div class="search-form-container">
-                             <InputSelect @bind-Value="dateModel.Month" class="month-dropdown" disabled="@(isPestFound ? false : true)">
-                                 <option value="">Выберите месяц</option>
-                                 @foreach (var month in months)
-                                 {
-                                     <option value="@month">@month</option>
-                                 }
-                             </InputSelect>
-                             <button @onclick="HandleSearch" class="btn btn-primary" disabled="@(isPestFound ? false : true)">Расчитать</button>
-                         </div>
-                     </div>
-                 </div>
-         </EditForm>
-     
-         @if (selectedMonthName != null && dataList != null)
-         {
-             <h4>Результаты для месяца: @selectedMonthName</h4>
-             <div style="display: flex; justify-content: center;">
-                 <table class="table" style="width: 80%; max-width: 800px; border-collapse: collapse;">
-                     <thead>
-                         <tr>
-                             <th style="padding: 8px; border: 1px solid #ddd;">День</th>
-                             <th style="padding: 8px; border: 1px solid #ddd;">Этап</th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                         @for (int i = 0; i < dataList.Count; i++)
-                         {
-                             var data = dataList[i];
-                             <tr style="background-color: @(i % 2 == 0 ? "#f2f2f2" : "white");">
-                                 <td style="padding: 8px; border: 1px solid #ddd;">@data.Day</td>
-                                 <td style="padding: 8px; border: 1px solid #ddd;">
-                                     @if (data.Stage == 1)
-                                     {
-                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                         <p>Личинка / Имаго @data.Stage</p>
-                                     }
-                                     else if (data.Stage == 2)
-                                     {
-                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                         <p>Имаго / Яйцо @data.Stage</p>
-                                     }
-                                     else if (data.Stage == 3)
-                                     {
-                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                         <p>Имаго / Яйцо / Личинка @data.Stage</p>
-                                     }
-                                     else if (data.Stage == 4)
-                                     {
-                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                         <p>Яйцо / Личинка / Имаго @data.Stage</p>
-                                     }
-                                     else if (data.Stage == 5)
-                                     {
-                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                         <p>Личинка / Имаго / Яйцо @data.Stage</p>
-                                     }
-                                     else if (data.Stage == 6)
-                                     {
-                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                         <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                         <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
-                                         <p>Имаго/ Личинка / Яйцо @data.Stage</p>
-                                     }
-                                     else if (data.Stage == 7)
-                                     {
-                                         <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
-                                        <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
-                                         <p>Имаго / Личинка @data.Stage</p>
-                                     }
-                                     else
-                                     {
-                                         @data.Stage
-                                     }
-                                 </td>
-                             </tr>
-                         }
-                     </tbody>
-                 </table>
-             </div>
-         }
-               
-               @code {
-                   private DateModel dateModel = new DateModel();
-                   private string selectedMonthName;
-                   private string searchText; // Название вредителя
-                   private List<DataService.DayData> dataList = new List<DataService.DayData>(); // Инициализация
-               
-                   private List<string> months = new List<string>
-                   {
-                       "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-                   };
-               
-                   private async Task HandleSearch()
-                   {
-                       if (months.Contains(dateModel.Month))
-                       {
-                           selectedMonthName = dateModel.Month;
-                           // Приведение пользовательского ввода к нижнему регистру и удаление пробелов
-                           string cleanedTableName = searchText.Replace(" ", "").ToLower();
-
-                           // Вызов метода DataService с передачей очищенного названия вредителя и месяца
-                           dataList = await dataService.GetDataByTableAsync(cleanedTableName, selectedMonthName) ?? new List<DataService.DayData>();
-                       }
-                       else
-                       {
-                           Console.WriteLine("Неправильный месяц");
-                       }
-                   }
-               
-                   public class DateModel
-                   {
-                       [Required(ErrorMessage = "Месяц обязателен")]
-                       public string Month { get; set; }
-                   }
-               }
+        <h1 class="display-4 fw-bold text-body-emphasis">Рассчитать фенологический календарь</h1>
         
-        </div>
+        <EditForm Model="@dateModel" OnValidSubmit="@HandleSearch">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="date-form-container">
+                <div class="date-form">
+                    <div class="search-form-container">
+                        <InputSelect @bind-Value="dateModel.Month" class="month-dropdown" disabled="@(isPestFound ? false : true)">
+                            <option value="">Выберите месяц</option>
+                            @foreach (var month in months)
+                            {
+                                <option value="@month">@month</option>
+                            }
+                        </InputSelect>
+                        <button @onclick="HandleSearch" class="btn btn-primary" disabled="@(isPestFound ? false : true)">Рассчитать</button>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+
+        <!-- Спиннер загрузки -->
+        @if (isLoading)
+        {
+            <div class="loading-spinner">
+                <p>Загрузка...</p>
+                <!-- Можно использовать библиотеку спиннеров или кастомный CSS -->
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }
+     
+        @if (selectedMonthName != null && dataList != null && !isLoading)
+        {
+            <h4>Результаты для месяца: @selectedMonthName</h4>
+            <div style="display: flex; justify-content: center;">
+                <table class="table" style="width: 80%; max-width: 800px; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="padding: 8px; border: 1px solid #ddd;">День</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Этап</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < dataList.Count; i++)
+                        {
+                            var data = dataList[i];
+                            <tr style="background-color: @(i % 2 == 0 ? "#f2f2f2" : "white");">
+                                <td style="padding: 8px; border: 1px solid #ddd;">@data.Day</td>
+                                <td style="padding: 8px; border: 1px solid #ddd;">
+                                    @if (data.Stage == 1)
+                                    {
+                                        <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                        <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                        <p>Личинка / Имаго @data.Stage</p>
+                                    }
+                                    else if (data.Stage == 2)
+                                    {
+                                        <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                        <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                        <p>Имаго / Яйцо @data.Stage</p>
+                                    }
+                                    else if (data.Stage == 3)
+                                    {
+                                        <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                        <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                        <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                        <p>Имаго / Яйцо / Личинка @data.Stage</p>
+                                    }
+                                    else if (data.Stage == 4)
+                                    {
+                                        <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                        <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                        <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                        <p>Яйцо / Личинка / Имаго @data.Stage</p>
+                                    }
+                                    else if (data.Stage == 5)
+                                    {
+                                        <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                        <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                        <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                        <p>Личинка / Имаго / Яйцо @data.Stage</p>
+                                    }
+                                    else if (data.Stage == 6)
+                                    {
+                                        <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                        <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                        <img src="img/Egg.png" alt="Stage 2" style="width: 40px; height: 40px;" />
+                                        <p>Имаго/ Личинка / Яйцо @data.Stage</p>
+                                    }
+                                    else if (data.Stage == 7)
+                                    {
+                                        <img src="img/Imago.png" alt="Stage 1" style="width: 40px; height: 40px;" />
+                                        <img src="img/Larva.png" alt="Stage 3" style="width: 40px; height: 40px;" />
+                                        <p>Имаго / Личинка @data.Stage</p>
+                                    }
+                                    else
+                                    {
+                                        @data.Stage
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+           
+        @code {
+            private DateModel dateModel = new DateModel();
+            private string selectedMonthName;
+            private string searchText; // Название вредителя
+            private List<DataService.DayData> dataList = new List<DataService.DayData>(); // Инициализация
+            private bool isLoading = false; // Переменная для отслеживания состояния загрузки
+
+            private List<string> months = new List<string>
+            {
+                "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+            };
+
+            private async Task HandleSearch()
+            {
+                isLoading = true; // Начало загрузки
+                StateHasChanged(); // Обновляем UI, чтобы показать спиннер
+
+                // Искусственная задержка для имитации долгой загрузки
+                await Task.Delay(1000); // 2000 миллисекунд = 2 секунды
+
+                if (months.Contains(dateModel.Month))
+                {
+                    selectedMonthName = dateModel.Month;
+                    // Приведение пользовательского ввода к нижнему регистру и удаление пробелов
+                    string cleanedTableName = searchText.Replace(" ", "").ToLower();
+
+                    // Вызов метода DataService с передачей очищенного названия вредителя и месяца
+                    dataList = await dataService.GetDataByTableAsync(cleanedTableName, selectedMonthName) ?? new List<DataService.DayData>();
+                }
+                else
+                {
+                    Console.WriteLine("Неправильный месяц");
+                }
+
+                isLoading = false; // Окончание загрузки
+                StateHasChanged(); // Обновляем UI, чтобы скрыть спиннер и показать результаты
+            }
+
+            public class DateModel
+            {
+                [Required(ErrorMessage = "Месяц обязателен")]
+                public string Month { get; set; }
+            }
+        }
     </div>
+</div>
 
 
 
