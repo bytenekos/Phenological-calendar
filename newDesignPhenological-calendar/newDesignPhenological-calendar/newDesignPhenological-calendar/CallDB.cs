@@ -14,7 +14,7 @@ namespace newDesignPhenologicalcalendar
         string dbuser = Environment.GetEnvironmentVariable("DBUSER");
         string dbpassword = Environment.GetEnvironmentVariable("DBPWD");
         
-            string Connect = string.Format("Database={0};Datasource={1};User={2};Password={3};", dbname, dbhost, dbuser, dbpassword);
+            string Connect = string.Format("Database={0};Datasource={1};User={2};Password={3};Max Pool Size=200;", dbname, dbhost, dbuser, dbpassword);
 
 
             MySqlConnection mysql_connection = new MySqlConnection(Connect);

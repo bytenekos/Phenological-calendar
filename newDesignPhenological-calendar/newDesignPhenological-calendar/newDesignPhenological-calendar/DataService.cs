@@ -33,17 +33,28 @@ public class DataService
         public int Stage { get; set; }
     }
     
-    private string _connectionString = $"Server={Config.DbHost};Database={Config.DbName};Uid={Config.DbUser};Pwd={Config.DbPassword};";
+    private string _connectionString = $"Server={Config.DbHost};Database={Config.DbName};Uid={Config.DbUser};Pwd={Config.DbPassword};Max Pool Size=200;";
     
 
-    public async Task<List<DayData>> GetDataByMonthAsync(string month)
+    public async Task<List<DayData>> GetDataByTableAsync(string tableName, string month)
     {
+        
+        var allowedTables = new List<string> { "тепличнаябелокрылка", "тепличныйтрипс" };
+
+        // Если таблица не найдена в списке допустимых, выбрасываем исключение
+        if (!allowedTables.Contains(tableName))
+        {
+            throw new ArgumentException("Недопустимое название таблицы.");
+        }
+
         var dataList = new List<DayData>();
+
+        string query = $"SELECT day, stage FROM {tableName} WHERE month = @month";
 
         using (MySqlConnection conn = new MySqlConnection(_connectionString))
         {
             await conn.OpenAsync();
-            MySqlCommand cmd = new MySqlCommand("SELECT day, stage FROM ТепличнаяБелокрылка WHERE month = @month", conn);
+            MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@month", month);
             using (DbDataReader reader = await cmd.ExecuteReaderAsync())
             {
@@ -58,7 +69,7 @@ public class DataService
                 }
             }
         }
-
         return dataList;
     }
+
 }

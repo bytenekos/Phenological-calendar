@@ -32,7 +32,6 @@
                         <button class="btn btn-outline-success" type="submit" @onclick="popit">Найти</button>
                     </a>
                 </div>
-
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                     <div class="col-10 col-sm-8 col-lg-6">
                         <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
@@ -56,7 +55,8 @@
 
     string[] info = new string[4];
 
-    private string searchText = string.Empty;
+    /*private string searchText = string.Empty;*/
+    private List<DataService.DayData> searchResult;
 
     private string notFound = "";
 
@@ -218,6 +218,7 @@
                @code {
                    private DateModel dateModel = new DateModel();
                    private string selectedMonthName;
+                   private string searchText; // Название вредителя
                    private List<DataService.DayData> dataList = new List<DataService.DayData>(); // Инициализация
                
                    private List<string> months = new List<string>
@@ -230,7 +231,11 @@
                        if (months.Contains(dateModel.Month))
                        {
                            selectedMonthName = dateModel.Month;
-                           dataList = await dataService.GetDataByMonthAsync(selectedMonthName) ?? new List<DataService.DayData>(); // Проверка на null
+                           // Приведение пользовательского ввода к нижнему регистру и удаление пробелов
+                           string cleanedTableName = searchText.Replace(" ", "").ToLower();
+
+                           // Вызов метода DataService с передачей очищенного названия вредителя и месяца
+                           dataList = await dataService.GetDataByTableAsync(cleanedTableName, selectedMonthName) ?? new List<DataService.DayData>();
                        }
                        else
                        {
