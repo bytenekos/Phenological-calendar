@@ -304,6 +304,11 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.footer {
+    text-align: center;
+    padding-bottom: 1rem;
+    font-size: 10px;
+}
 
 .me-2 {
     margin-right: .5rem;
