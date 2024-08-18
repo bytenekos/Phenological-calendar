@@ -1,5 +1,6 @@
 using newDesignPhenological_calendar.Components;
 using newDesignPhenological_calendar.Components.Pages;
+using Blazored.Typeahead;
 
 namespace newDesignPhenological_calendar
 {
@@ -18,6 +19,7 @@ namespace newDesignPhenological_calendar
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<DataService>();
+            
             
             var app = builder.Build();
 

@@ -1,80 +1,49 @@
 ﻿@page "/information"
-@attribute [StreamRendering]
+@using System.Threading.Tasks
+@using System.Collections.Generic
+@using System.Linq
+@using newDesignPhenologicalcalendar
 
 <PageTitle>Вырастим вместе</PageTitle>
 
+<BlazoredTypeahead SearchMethod="AutoSearch" @bind-Value="SelectedPests" Placeholder="Search for pests...">
+    <SelectedTemplate>
+        @context.PestsName
+    </SelectedTemplate>
+    <ResultTemplate>
+        <b>@context.PestsName</b>
+    </ResultTemplate>
+</BlazoredTypeahead>
 
-<style>
-.container {
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
+@if (SelectedPests != null)
+{
+    <p>Вы выбрали: <b>@SelectedPests.PestsName</b></p>
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
+@code {
+    private List<Pests> pests;
+    private Pests SelectedPests;
 
-p {
-    font-size: 1.2em;
-    margin-bottom: 40px;
-}
+    protected override void OnInitialized()
+    {
+        pests = new List<Pests>
+        {
+            new Pests("Тепличная белокрылка"),
+            new Pests("Тепличный трипс"),
+            new Pests("Луковая муха"),
+            new Pests("Колорадский жук")
+        };
+    }
 
-.profile-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    private async Task<IEnumerable<Pests>> AutoSearch(string searchPests)
+    {
+        if (string.IsNullOrEmpty(searchPests))
+        {
+            return new List<Pests>();
+        }
+        return await Task.FromResult(pests.Where(x => x.PestsName.ToLower().Contains(searchPests.ToLower())).ToList());
+    }
 }
-
-.profile-card {
-    background-color: #fff;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-}
-
-.profile-card img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-}
-
-.profile-card h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.profile-card p {
-    font-size: 1em;
-}
-</style>
-<div class="container">
-        <h1>Наш персонал</h1>
-        <p>Основная причина, по которой мы продолжаем адаптировать и развивать нашу бизнес-модель, заключается в том, чтобы гарантировать, что мы оправдываем ожидания наших клиентов.</p>
-        <div class="profile-cards">
-            <div class="profile-card">
-                <img src="person1.jpg" alt="Фотография сотрудника">
-                <h2>Пол Ларсон</h2>
-                <p>Эта разработка является еще одним примером инновационного подхода Daily Poppins к удовлетворению потребностей своих клиентов.</p>
-            </div>
-            <div class="profile-card">
-                <img src="person2.jpg" alt="Фотография сотрудника">
-                <h2>Рауль Солис</h2>
-                <p>Эта разработка является еще одним примером инновационного подхода Daily Poppins к удовлетворению потребностей своих клиентов.</p>
-            </div>
-            <div class="profile-card">
-                <img src="person3.jpg" alt="Фотография сотрудника">
-                <h2>Имя Сотрудника</h2>
-                <p>Основная причина, по которой мы продолжаем адаптировать и развивать нашу бизнес-модель, заключается в том, чтобы гарантировать, что мы оправдываем ожидания наших клиентов.</p>
-            </div>
-        </div>
-    </div>
 
 <footer class="pt-3 mt-4 text-body-secondary border-top">
     <p align="center" style="font-size: 10px;">

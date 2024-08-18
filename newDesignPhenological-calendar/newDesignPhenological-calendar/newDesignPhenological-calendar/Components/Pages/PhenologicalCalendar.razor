@@ -2,6 +2,7 @@
 @rendermode InteractiveServer
 @using System.ComponentModel.DataAnnotations
 @inject DataService dataService
+@using newDesignPhenologicalcalendar
 
 
 <PageTitle>Вырастим вместе</PageTitle>
@@ -22,16 +23,34 @@
     </div> 
 </div>
 
+
+
 <div class="bg-image-search" style="background-image: url(@linkImg);">
     <div class="container py-4">
-        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3 " style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
+        <div class="p-5 mb-4 bg-body-tertiary-theory rounded-3" style="background-color: rgba(211, 211, 211, 0.9); border-radius: 15px;">
             <div class="container-fluid py-5">
-                <div class="parent d-flex">
-                    <input class="form-control me-2" type="text" id="searchString" @bind="searchText" placeholder="Введите название вредителя" @oninput="popit">
-                    <a >
+                <div class="d-flex justify-content-center align-items-center mb-4">
+                    <div class="d-flex align-items-center">
+                        <div class="me-2" style="max-width: 500px; flex-grow: 1;">
+                            <BlazoredTypeahead
+                                SearchMethod="AutoSearch"
+                                @bind-Value="SelectedPests"
+                                Placeholder="Введите название вредителя"
+                                class="form-control"
+                                style="height: 40px; padding: 10px;"> <!-- Increased height and padding -->
+                                <SelectedTemplate>
+                                    @context.PestsName
+                                </SelectedTemplate>
+                                <ResultTemplate>
+                                    <b>@context.PestsName</b>
+                                </ResultTemplate>
+                            </BlazoredTypeahead>
+                        </div>
+
                         <button class="btn btn-outline-success" type="submit" @onclick="popit">Найти</button>
-                    </a>
+                    </div>
                 </div>
+
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                     <div class="col-10 col-sm-8 col-lg-6">
                         <img src="@linkImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
@@ -49,13 +68,36 @@
     </div>
 </div>
 
+
+
 @code {
+    private List<Pests> pests;
+    private Pests SelectedPests;
+
+    protected override void OnInitialized()
+    {
+        pests = new List<Pests>
+        {
+            new Pests("Тепличная белокрылка"),
+            new Pests("Тепличный трипс"),
+        };
+    }
+
+    private async Task<IEnumerable<Pests>> AutoSearch(string searchPests)
+    {
+        if (string.IsNullOrEmpty(searchPests))
+        {
+            return new List<Pests>();
+        }
+        return await Task.FromResult(pests.Where(x => x.PestsName.ToLower().Contains(searchPests.ToLower())).ToList());
+    }
 
     newDesignPhenologicalcalendar.CallDB callDB = new newDesignPhenologicalcalendar.CallDB();
 
     string[] info = new string[4];
 
-    /*private string searchText = string.Empty;*/
+    private string searchText = string.Empty;
+
     private List<DataService.DayData> searchResult;
 
     private string notFound = "";
@@ -66,11 +108,16 @@
     private string linkWIki = "https://ru.wikipedia.org/wiki/%D0%92%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D0%B6%D0%B8%D0%B2%D0%BE%D1%82%D0%BD%D0%BE%D0%B5)";
     private bool isPestFound = false;
 
+    private void OnPestSelected()
+    {
+        searchText = SelectedPests?.PestsName;
+    }
+
     public void popit()
     {
-        // clay();
+        OnPestSelected(); // Ensure searchText is updated
 
-        if (searchText != "")
+        if (!string.IsNullOrEmpty(searchText))
         {
             info = callDB.calldbkak($"SELECT * FROM pests WHERE namess = '{searchText}'");
 
@@ -87,15 +134,18 @@
                 linkWIki = info[3];
                 isPestFound = true;
             }
+            Console.WriteLine($"Пользователь успешно нашёл: {searchText}");
         }
         else
         {
-            Console.WriteLine($"Пользователь написал {searchText}");
+            Console.WriteLine($"Пользователь не ввёл текст для поиска");
             isPestFound = false;
         }
-
     }
 }
+
+
+
 
 <style>
     .search-form-container {
@@ -138,13 +188,11 @@
                 </div>
             </div>
         </EditForm>
-
-        <!-- Спиннер загрузки -->
+        
         @if (isLoading)
         {
             <div class="loading-spinner">
                 <p>Загрузка...</p>
-                <!-- Можно использовать библиотеку спиннеров или кастомный CSS -->
                 <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
@@ -230,7 +278,7 @@
         @code {
             private DateModel dateModel = new DateModel();
             private string selectedMonthName;
-            private string searchText; // Название вредителя
+            /*private string searchText;*/ // Название вредителя
             private List<DataService.DayData> dataList = new List<DataService.DayData>(); // Инициализация
             private bool isLoading = false; // Переменная для отслеживания состояния загрузки
 
