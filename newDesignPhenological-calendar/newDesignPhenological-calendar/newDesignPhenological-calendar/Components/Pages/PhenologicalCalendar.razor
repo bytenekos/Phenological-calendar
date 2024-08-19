@@ -37,7 +37,7 @@
                                 @bind-Value="SelectedPests"
                                 Placeholder="Введите название вредителя"
                                 class="form-control"
-                                style="height: 40px; padding: 10px;"> <!-- Increased height and padding -->
+                                style="height: 40px; padding: 10px;"> 
                                 <SelectedTemplate>
                                     @context.PestsName
                                 </SelectedTemplate>
@@ -67,6 +67,7 @@
         </div>
     </div>
 </div>
+
 
 
 
@@ -176,7 +177,7 @@
             <div class="date-form-container">
                 <div class="date-form">
                     <div class="search-form-container">
-                        <InputSelect @bind-Value="dateModel.Month" class="month-dropdown" disabled="@(isPestFound ? false : true)">
+                        <InputSelect @bind-Value="dateModel.Month" class="month-dropdown" disabled="@(isPestFound ? false : true)" style="border-radius: 5px;">
                             <option value="">Выберите месяц</option>
                             @foreach (var month in months)
                             {
