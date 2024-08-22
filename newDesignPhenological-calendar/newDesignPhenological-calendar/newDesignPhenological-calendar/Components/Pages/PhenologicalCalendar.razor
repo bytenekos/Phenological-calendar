@@ -31,7 +31,7 @@
             <div class="container-fluid py-5">
                 <div class="d-flex justify-content-center align-items-center mb-4">
                     <div class="d-flex align-items-center">
-                        <div class="me-2" style="max-width: 500px; flex-grow: 1;">
+                        <div class="me-2 blazored-typeahead__controls" style="max-width: 500px; flex-grow: 1;">
                             <BlazoredTypeahead
                                 SearchMethod="AutoSearch"
                                 @bind-Value="SelectedPests"
@@ -46,7 +46,6 @@
                                 </ResultTemplate>
                             </BlazoredTypeahead>
                         </div>
-
                         <button class="btn btn-outline-success" type="submit" @onclick="popit">Найти</button>
                     </div>
                 </div>

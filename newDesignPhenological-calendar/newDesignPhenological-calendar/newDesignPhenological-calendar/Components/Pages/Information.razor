@@ -1,49 +1,5 @@
 ﻿@page "/information"
-@using System.Threading.Tasks
-@using System.Collections.Generic
-@using System.Linq
-@using newDesignPhenologicalcalendar
-
 <PageTitle>Вырастим вместе</PageTitle>
-
-<BlazoredTypeahead SearchMethod="AutoSearch" @bind-Value="SelectedPests" Placeholder="Search for pests...">
-    <SelectedTemplate>
-        @context.PestsName
-    </SelectedTemplate>
-    <ResultTemplate>
-        <b>@context.PestsName</b>
-    </ResultTemplate>
-</BlazoredTypeahead>
-
-@if (SelectedPests != null)
-{
-    <p>Вы выбрали: <b>@SelectedPests.PestsName</b></p>
-}
-
-@code {
-    private List<Pests> pests;
-    private Pests SelectedPests;
-
-    protected override void OnInitialized()
-    {
-        pests = new List<Pests>
-        {
-            new Pests("Тепличная белокрылка"),
-            new Pests("Тепличный трипс"),
-            new Pests("Луковая муха"),
-            new Pests("Колорадский жук")
-        };
-    }
-
-    private async Task<IEnumerable<Pests>> AutoSearch(string searchPests)
-    {
-        if (string.IsNullOrEmpty(searchPests))
-        {
-            return new List<Pests>();
-        }
-        return await Task.FromResult(pests.Where(x => x.PestsName.ToLower().Contains(searchPests.ToLower())).ToList());
-    }
-}
 
 <footer class="pt-3 mt-4 text-body-secondary border-top">
     <p align="center" style="font-size: 10px;">

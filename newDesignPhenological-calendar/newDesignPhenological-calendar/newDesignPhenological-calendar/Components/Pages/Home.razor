@@ -1,45 +1,26 @@
 ﻿@page "/"
-<link href="app.css" rel="stylesheet">
 <PageTitle>Вырастим вместе</PageTitle>
-<style>
-        /* Стили для фона видео */
-        #background-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        /* Стили для контейнера с контентом */
-
-    </style>
+<link href="app.css" rel="stylesheet">
 
 <div>
     <div class="background-video">
-         <video src="video/5673591-hd_1920_1080_30fps.mp4" autoplay muted loop id="background-video"></video>
-         <div class="container py-4 animate__animated animate__fadeInDown" style="background: rgba(255, 255, 255, 0); backdrop-filter: blur(10px); border-radius: 30px;">
-    
-             <div class="p-5 mb-4 bg-body-tertiary rounded-box" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: white;">
-                 <div class="container-fluid">
-                     <h1 class="display-5 fw-bold">О проекте</h1>
-                     <p class="col-md-8 fs-4">
-                         Вырастим вместе – проект направленный на развитие агроспециальностей и популяризацию сельского хозяйства среди школьников.
+        <video src="video/5673591-hd_1920_1080_30fps.mp4" autoplay muted loop id="background-video"></video>
+        <div class="container py-4 animate__animated animate__fadeInDown" style="backdrop-filter: blur(10px); border-radius: 30px;">
+            <div class="p-5 mb-4 bg-body-tertiary rounded-box" style="background: rgba(255, 255, 255, 0.1); color: white;">
+                <div class="container-fluid">
+                    <h1 class="display-5 fw-bold">О проекте</h1>
+                    <p class="col-md-8 fs-4">
+                        Вырастим вместе – проект направленный на развитие агроспециальностей и популяризацию сельского хозяйства среди школьников.
         
-                         Мы ценим наше главное достояние, нашу землю и хотим донести до всех о её ценности.
-                     </p>
-                     <button class="btn btn-primary btn-lg" type="button" onclick="window.open('https://vk.com/letsgrowuptogether', '_blank');">Группа Вконтакте</button>
-                 </div>
-             </div>
-             
-         
-         
+                        Мы ценим наше главное достояние, нашу землю и хотим донести до всех о её ценности.
+                    </p>
+                    <button class="btn btn-primary btn-lg" type="button" onclick="window.open('https://vk.com/letsgrowuptogether', '_blank');">Группа Вконтакте</button>
+                </div>
+            </div>
             
             <div class="row align-items-md-stretch">
                 <div class="col-md-6">
-                    <div class="h-100 p-5 text-bg-dark rounded-box"  style="background-color: rgba(17, 102, 26, 0.5); backdrop-filter: blur(10px);">
+                    <div class="h-100 p-5 text-bg-dark rounded-box"  style="background-color: rgba(17, 102, 26, 0.5);">
                         <h2>Наш проект</h2>
                         <p>
                             Проект создан для популяризации науки среди молодёжи. Здесь вы узнаете как круто быть агрономом и чем они занимаются. Мы проводим занятия для ребят в возрасте от 12 до 18 лет. Мы ставим целью привлечь молодёжь к сельскому хозяйству.
@@ -50,15 +31,13 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="h-100 p-5 bg-body-tertiary rounded-box" style="background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: white">
+                    <div class="h-100 p-5 bg-body-tertiary rounded-box" style="background-color: rgba(255, 255, 255, 0.1); color: white">
                         <h2>Фенологический календарь</h2>
                         <p>Фенологический календарь - это разделение года на качественно различающиеся периоды — сезоны и под сезоны, каждому из которых свойственно специфическое состояние объектов живой и неживой природы и их особое взаимодействие.</p>
                         <button class="btn btn-primary" type="button" onclick="window.location.href = '/phenological-calendar';">Сделать расчёты</button>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
     
@@ -77,7 +56,6 @@
                     </div>
                 </div>
             </div>
-                
         </div>
         
         <div class="container px-4 py-5" id="custom-cards">
@@ -120,7 +98,7 @@
                 </div>
             </div>
         </div>
-            <footer class="pt-3 mt-4 text-body-secondary border-top">
+        <footer class="pt-3 mt-4 text-body-secondary border-top">
             <p align="center" style="font-size: 10px;">
                 <br>
                 Все права защищены. Авторы проекта не несут ответственности
@@ -130,10 +108,19 @@
                 ознакомительный характер и ее перепечатка в СМИ запрещена.
                 Для принятия решений необходимо руководствоваться официальными<br>
                 расчетами фенологического календаря.  © 2024 <br>
-            
             </p>
-            </footer>
+        </footer>
     </div>
-
-    
 </div>
+
+<style>
+    #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }    
+</style>
